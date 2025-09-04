@@ -1,0 +1,9 @@
+LICENSE
+README.md
+pyproject.toml
+src/sherlock_grist_to_crm/__init__.py
+src/sherlock_grist_to_crm/greetings.py
+src/sherlock_grist_to_crm.egg-info/PKG-INFO
+src/sherlock_grist_to_crm.egg-info/SOURCES.txt
+src/sherlock_grist_to_crm.egg-info/dependency_links.txt
+src/sherlock_grist_to_crm.egg-info/top_level.txt

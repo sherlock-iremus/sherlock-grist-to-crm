@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "grist-api-helpers"
+version = "0.1.0"
+description = ""
+readme = "README.md"
+authors = [{ name = "Thomas Bottini", email = "thomas.bottini@cnrs.fr" }]
+license = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = []
