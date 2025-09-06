@@ -3,6 +3,11 @@ from typing import Dict
 from grist_api_helpers import records
 from pprint import pprint
 from .GristMappingData import MappingDataType, GristMappingData, GristMappingDataCodeToUuid
+from .GristDataParser import GristDataParser
+
+print('🌲' * 33)
+print('🌲' * 13 + '      📡      ' + '🌲' * 13)
+print('🌲' * 33)
 
 parser = argparse.ArgumentParser()
 
@@ -28,28 +33,40 @@ args = parser.parse_args()
 # FETCH GRIST MAPPING DATA
 ################################################################################
 
-print('🌲🌲🌲🌲🌲 📡 🌲🌲🌲🌲🌲')
-GRIST_MAPPING_DATA: GristMappingData = GristMappingData()
+grist_mapping_data: GristMappingData = GristMappingData()
 for x in list(MappingDataType):
     grist_table_id = getattr(args, x.value)
     grist_table_data = records(args.grist_base, args.grist_api_key, args.grist_doc_id, grist_table_id)['records']
-    GRIST_MAPPING_DATA[x] = GristMappingDataCodeToUuid()
+    grist_mapping_data[x] = GristMappingDataCodeToUuid()
     match x:
         case MappingDataType.PROJECTS:
             for row in grist_table_data:
-                GRIST_MAPPING_DATA[x][row['fields']['E42_business_id'].strip()] = row['fields']['UUID'].strip()
+                grist_mapping_data[x][row['fields']['E42_business_id'].strip()] = row['fields']['UUID'].strip()
         case MappingDataType.P177_E55:
             for row in grist_table_data:
-                GRIST_MAPPING_DATA[x][row['fields']['project_annotation_id'].strip()] = row['fields']['UUID'].strip()
+                grist_mapping_data[x][row['fields']['project_annotation_id'].strip()] = row['fields']['UUID'].strip()
         case MappingDataType.RDF_PROPERTIES:
             for row in grist_table_data:
-                GRIST_MAPPING_DATA[x][row['fields']['Prefix'] + ':' + row['fields']['Local_name']] = row['fields']['URI']
+                grist_mapping_data[x][row['fields']['Prefix'] + ':' + row['fields']['Local_name']] = row['fields']['URI']
         case _:
             for row in grist_table_data:
-                GRIST_MAPPING_DATA[x][row['fields']['Grist_column_code'].strip()] = row['fields']['UUID'].strip()
+                grist_mapping_data[x][row['fields']['Grist_column_code'].strip()] = row['fields']['UUID'].strip()
 
 if args.project_id:
-    project_uuid = GRIST_MAPPING_DATA[MappingDataType.PROJECTS][args.project_id]
+    project_uuid = grist_mapping_data[MappingDataType.PROJECTS][args.project_id]
 else:
     project_uuid = None
 
+################################################################################
+# PARSE DATA
+################################################################################
+
+gdp = GristDataParser(
+    grist_mapping_data=grist_mapping_data,
+    project_id=args.project_id,
+    project_uuid=project_uuid,
+    output_ttl=args.output_ttl,
+    e13_authors=args.e13_authors.split(',') if args.e13_authors else [],
+    makerdfslabelfrom=args.makerdfslabelfrom.split(',') if args.makerdfslabelfrom else [],
+
+)
