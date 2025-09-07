@@ -5,9 +5,9 @@ from pprint import pprint
 from .GristMappingData import MappingDataType, GristMappingData, GristMappingDataCodeToUuid
 from .GristDataParser import GristDataParser
 
-print('🌲' * 33)
-print('🌲' * 13 + '      📡      ' + '🌲' * 13)
-print('🌲' * 33)
+print('🌲' * 69)
+print('🌲' * 31 + '      📡      ' + '🌲' * 31)
+print('🌲' * 69)
 
 parser = argparse.ArgumentParser()
 
@@ -61,6 +61,8 @@ else:
 # PARSE DATA
 ################################################################################
 
+grist_records = records(args.grist_base, args.grist_api_key, args.grist_doc_id, args.grist_table_id)['records']
+
 gdp = GristDataParser(
     grist_mapping_data=grist_mapping_data,
     project_id=args.project_id,
@@ -68,5 +70,11 @@ gdp = GristDataParser(
     output_ttl=args.output_ttl,
     e13_authors=args.e13_authors.split(',') if args.e13_authors else [],
     makerdfslabelfrom=args.makerdfslabelfrom.split(',') if args.makerdfslabelfrom else [],
-
+    grist_records=grist_records,
+    e32_uuid=args.e32_uuid,
+    p2_has_type=args.p2_has_type,
+    rdf_type=args.rdf_type,
+    sherlock_collection=args.sherlock_collection,
 )
+
+del gdp

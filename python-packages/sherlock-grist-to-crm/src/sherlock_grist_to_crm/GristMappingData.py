@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from enum import Enum, auto
+from enum import Enum
 
 
 class MappingDataType(Enum):
