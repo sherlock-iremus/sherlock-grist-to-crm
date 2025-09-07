@@ -130,22 +130,22 @@ class GristDataParser:
             if 'UUID' in record['fields'].keys() and record['fields']['UUID']:
                 subject = SHERLOCK_DATA[record['fields']['UUID']]
 
-            # if self.rdf_type:
-            #     self.graph.add((subject, RDF.type, URIRef(self.rdf_type)))
+            if self.rdf_type:
+                self.graph.add((subject, RDF.type, URIRef(self.rdf_type)))
 
-            # if self.p2_has_type:
-            #     types = self.p2_has_type.split(',')
-            #     for x in types:
-            #         self.graph.add((subject, CRM.P2_has_type, URIRef(x)))
+            if self.p2_has_type:
+                types = self.p2_has_type.split(',')
+                for x in types:
+                    self.graph.add((subject, CRM.P2_has_type, URIRef(x)))
 
-            # if self.sherlock_collection:
-            #     self.graph.add((URIRef(self.sherlock_collection), SHERLOCK.has_member, subject))
+            if self.sherlock_collection:
+                self.graph.add((URIRef(self.sherlock_collection), SHERLOCK.has_member, subject))
 
-            # if self.e32_uuid:
-            #     self.graph.add((SHERLOCK_DATA[self.e32_uuid], CRM.P71_lists, subject))
+            if self.e32_uuid:
+                self.graph.add((SHERLOCK_DATA[self.e32_uuid], CRM.P71_lists, subject))
 
-            # if self.project_uuid:
-            #     self.graph.add((subject, SHERLOCK['hasContextProject'], URIRef(self.project_uuid)))
+            if self.project_uuid:
+                self.graph.add((subject, SHERLOCK['hasContextProject'], URIRef(self.project_uuid)))
 
             # for column_name, column_value in record['fields'].items():
             #     self.process_cell(subject, column_name, column_value)
