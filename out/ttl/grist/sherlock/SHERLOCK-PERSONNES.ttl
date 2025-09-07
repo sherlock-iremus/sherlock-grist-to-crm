@@ -1,2 +1,151 @@
 @base <http://data-iremus.huma-num.fr/id/> .
+@prefix crm: <http://www.cidoc-crm.org/cidoc-crm/> .
+
+<08a13162-1841-40e4-a1c8-c8f4033cbc6c> a crm:E21_Person ;
+    crm:P1_is_identified_by <10391c9f-f736-4a27-96de-9be2921876b1>,
+        <423e8ea8-bd6e-43fa-8dfe-8ec238c04544>,
+        <708c1bc9-4120-480e-a49e-6a5b37cf86df>,
+        <e6d89676-fd3f-48ea-87bb-a8623d0e8671> .
+
+<447b85ae-53c6-4787-8f63-4c9118023c92> a crm:E21_Person ;
+    crm:P1_is_identified_by <519df99e-665b-47ff-98b2-5b53518b65df>,
+        <793b1208-e1f2-413a-adae-f9baaae4ce1e> .
+
+<49c69132-183d-40d4-90f5-2b533ef7dfde> a crm:E21_Person ;
+    crm:P1_is_identified_by <4064c5c8-a613-4d44-adc0-b1baa03a0a17>,
+        <80b0ef66-5422-471a-bd9d-8f85ef9b6644>,
+        <96cff846-b6ca-40aa-b29e-42edd23f00f9>,
+        <eaa5bd53-838a-475e-82d5-0c7a63342b0d> .
+
+<4b310d11-24e4-41b6-b8e3-4fa223ff8fae> a crm:E21_Person ;
+    crm:P1_is_identified_by <aa830421-a4c6-4482-8552-43140a6ce5a5>,
+        <c8f64e36-736a-46b2-bef5-c86e831350bb> .
+
+<5d3e1e80-8f04-4a21-a085-f0fd2e1c40aa> a crm:E21_Person ;
+    crm:P1_is_identified_by <50ab1a1f-80f2-40e4-a4ec-ece7cad84b00>,
+        <beb08251-3e82-4e5e-b300-8a44632d7df2> .
+
+<b25c0ded-46e0-480d-8446-0a202266bd8f> a crm:E21_Person ;
+    crm:P1_is_identified_by <53d11a68-6ce4-4031-9597-fdf92a4977e4>,
+        <693b08a0-4bd8-4a13-b8df-85f330c51dc5>,
+        <daf50de3-d06c-4be2-b763-00ad6e551e68>,
+        <f1ad04e2-56a0-4954-a30c-c7338043cb36> .
+
+<da7fb3fe-dca3-4edf-aaa4-7f725ae60cd3> a crm:E21_Person ;
+    crm:P1_is_identified_by <4da760de-5e55-4d30-aebe-772d27ec01bc>,
+        <baa0a33c-8a21-477d-b9d8-d015941861d2> .
+
+<e6584d49-a83a-4a18-aab7-02ecaa80732b> a crm:E21_Person ;
+    crm:P1_is_identified_by <0d5f01a1-d970-4e29-9fc2-039fe9832fe8>,
+        <9b80e482-9a74-4de8-9e4c-f4c04df2d4f7> .
+
+<e6f783bc-2b2e-497b-9f48-f0bbd86f4bbb> a crm:E21_Person ;
+    crm:P1_is_identified_by <07a824ef-686d-4b93-8c11-f9128e9d84d8>,
+        <3102615b-cbe0-423b-926a-54ecc493157a>,
+        <69e126db-92bf-495c-906c-04f1ddfc8299>,
+        <d54cf396-87b1-41c8-a953-f68fec3ded99> .
+
+<07a824ef-686d-4b93-8c11-f9128e9d84d8> a crm:E42_Identifier ;
+    crm:P190_has_symbolic_content "DFA0DF" ;
+    crm:P2_has_type <5f1bb74f-6ea0-4073-8b68-086f98454f1c> .
+
+<0d5f01a1-d970-4e29-9fc2-039fe9832fe8> a crm:E42_Identifier ;
+    crm:P190_has_symbolic_content "0000-0001-8157-5049" ;
+    crm:P2_has_type <d7ef2583-ff31-4913-9ed3-bc3a1c664b21> .
+
+<10391c9f-f736-4a27-96de-9be2921876b1> a crm:E42_Identifier ;
+    crm:P190_has_symbolic_content "0000-0003-4308-0445" ;
+    crm:P2_has_type <d7ef2583-ff31-4913-9ed3-bc3a1c664b21> .
+
+<3102615b-cbe0-423b-926a-54ecc493157a> a crm:E42_Identifier ;
+    crm:P190_has_symbolic_content "Isabelle Pluvieux" ;
+    crm:P2_has_type <73ea8d74-3526-4f6a-8830-dd369795650d> .
+
+<4064c5c8-a613-4d44-adc0-b1baa03a0a17> a crm:E42_Identifier ;
+    crm:P190_has_symbolic_content "F75E25" ;
+    crm:P2_has_type <5f1bb74f-6ea0-4073-8b68-086f98454f1c> .
+
+<423e8ea8-bd6e-43fa-8dfe-8ec238c04544> a crm:E42_Identifier ;
+    crm:P190_has_symbolic_content "F75E25" ;
+    crm:P2_has_type <5f1bb74f-6ea0-4073-8b68-086f98454f1c> .
+
+<4da760de-5e55-4d30-aebe-772d27ec01bc> a crm:E42_Identifier ;
+    crm:P190_has_symbolic_content "Anne Piéjus" ;
+    crm:P2_has_type <73ea8d74-3526-4f6a-8830-dd369795650d> .
+
+<50ab1a1f-80f2-40e4-a4ec-ece7cad84b00> a crm:E42_Identifier ;
+    crm:P190_has_symbolic_content "0000-0002-5124-1328" ;
+    crm:P2_has_type <d7ef2583-ff31-4913-9ed3-bc3a1c664b21> .
+
+<519df99e-665b-47ff-98b2-5b53518b65df> a crm:E42_Identifier ;
+    crm:P190_has_symbolic_content "0009-0003-1238-8145" ;
+    crm:P2_has_type <d7ef2583-ff31-4913-9ed3-bc3a1c664b21> .
+
+<53d11a68-6ce4-4031-9597-fdf92a4977e4> a crm:E42_Identifier ;
+    crm:P190_has_symbolic_content "Nathalie Berton-Blivet" ;
+    crm:P2_has_type <73ea8d74-3526-4f6a-8830-dd369795650d> .
+
+<693b08a0-4bd8-4a13-b8df-85f330c51dc5> a crm:E42_Identifier ;
+    crm:P190_has_symbolic_content "00BBBB" ;
+    crm:P2_has_type <5f1bb74f-6ea0-4073-8b68-086f98454f1c> .
+
+<69e126db-92bf-495c-906c-04f1ddfc8299> a crm:E42_Identifier ;
+    crm:P190_has_symbolic_content "👑" ;
+    crm:P2_has_type <04242f64-fbb3-4b5b-bb2e-3ddd59eeea18> .
+
+<708c1bc9-4120-480e-a49e-6a5b37cf86df> a crm:E42_Identifier ;
+    crm:P190_has_symbolic_content "Nicolas Meeùs" ;
+    crm:P2_has_type <73ea8d74-3526-4f6a-8830-dd369795650d> .
+
+<793b1208-e1f2-413a-adae-f9baaae4ce1e> a crm:E42_Identifier ;
+    crm:P190_has_symbolic_content "Hervé Audéon" ;
+    crm:P2_has_type <73ea8d74-3526-4f6a-8830-dd369795650d> .
+
+<80b0ef66-5422-471a-bd9d-8f85ef9b6644> a crm:E42_Identifier ;
+    crm:P190_has_symbolic_content "0000-0001-9950-2657" ;
+    crm:P2_has_type <d7ef2583-ff31-4913-9ed3-bc3a1c664b21> .
+
+<96cff846-b6ca-40aa-b29e-42edd23f00f9> a crm:E42_Identifier ;
+    crm:P190_has_symbolic_content "H" ;
+    crm:P2_has_type <04242f64-fbb3-4b5b-bb2e-3ddd59eeea18> .
+
+<9b80e482-9a74-4de8-9e4c-f4c04df2d4f7> a crm:E42_Identifier ;
+    crm:P190_has_symbolic_content "Fabien Guilloux" ;
+    crm:P2_has_type <73ea8d74-3526-4f6a-8830-dd369795650d> .
+
+<aa830421-a4c6-4482-8552-43140a6ce5a5> a crm:E42_Identifier ;
+    crm:P190_has_symbolic_content "Alban Framboisier" ;
+    crm:P2_has_type <73ea8d74-3526-4f6a-8830-dd369795650d> .
+
+<baa0a33c-8a21-477d-b9d8-d015941861d2> a crm:E42_Identifier ;
+    crm:P190_has_symbolic_content "0000-0002-5105-627X" ;
+    crm:P2_has_type <d7ef2583-ff31-4913-9ed3-bc3a1c664b21> .
+
+<beb08251-3e82-4e5e-b300-8a44632d7df2> a crm:E42_Identifier ;
+    crm:P190_has_symbolic_content "Florence Gétreau" ;
+    crm:P2_has_type <73ea8d74-3526-4f6a-8830-dd369795650d> .
+
+<c8f64e36-736a-46b2-bef5-c86e831350bb> a crm:E42_Identifier ;
+    crm:P190_has_symbolic_content "0009-0003-3377-3587" ;
+    crm:P2_has_type <d7ef2583-ff31-4913-9ed3-bc3a1c664b21> .
+
+<d54cf396-87b1-41c8-a953-f68fec3ded99> a crm:E42_Identifier ;
+    crm:P190_has_symbolic_content "0009-0009-9315-9363" ;
+    crm:P2_has_type <d7ef2583-ff31-4913-9ed3-bc3a1c664b21> .
+
+<daf50de3-d06c-4be2-b763-00ad6e551e68> a crm:E42_Identifier ;
+    crm:P190_has_symbolic_content "🪈" ;
+    crm:P2_has_type <04242f64-fbb3-4b5b-bb2e-3ddd59eeea18> .
+
+<e6d89676-fd3f-48ea-87bb-a8623d0e8671> a crm:E42_Identifier ;
+    crm:P190_has_symbolic_content "N" ;
+    crm:P2_has_type <04242f64-fbb3-4b5b-bb2e-3ddd59eeea18> .
+
+<eaa5bd53-838a-475e-82d5-0c7a63342b0d> a crm:E42_Identifier ;
+    crm:P190_has_symbolic_content "Hugues Seress" ;
+    crm:P2_has_type <73ea8d74-3526-4f6a-8830-dd369795650d> .
+
+<f1ad04e2-56a0-4954-a30c-c7338043cb36> a crm:E42_Identifier ;
+    crm:P190_has_symbolic_content "0000-0002-5274-4330" ;
+    crm:P2_has_type <d7ef2583-ff31-4913-9ed3-bc3a1c664b21> .
 

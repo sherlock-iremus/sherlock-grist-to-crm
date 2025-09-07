@@ -33,6 +33,7 @@ args = parser.parse_args()
 # FETCH GRIST MAPPING DATA
 ################################################################################
 
+print('✨ Fetching Grist mapping data…')
 grist_mapping_data: GristMappingData = GristMappingData()
 for x in list(MappingDataType):
     grist_table_id = getattr(args, x.value)
@@ -61,6 +62,7 @@ else:
 # PARSE DATA
 ################################################################################
 
+print('✨ Fetching Grist records…')
 grist_records = records(args.grist_base, args.grist_api_key, args.grist_doc_id, args.grist_table_id)['records']
 
 gdp = GristDataParser(

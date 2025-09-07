@@ -147,8 +147,8 @@ class GristDataParser:
             if self.project_uuid:
                 self.graph.add((subject, SHERLOCK['hasContextProject'], URIRef(self.project_uuid)))
 
-            # for column_name, column_value in record['fields'].items():
-            #     self.process_cell(subject, column_name, column_value)
+            for column_name, column_value in record['fields'].items():
+                self.process_cell(subject, column_name, column_value)
 
     def process_record(self):
         pass
@@ -165,6 +165,8 @@ class GristDataParser:
         column_names_parts = column_name.split('___')
 
         matched = False
+
+        print(column_name, column_names_parts, column_value)
 
         # We have a predicate! (or a predicate that points to a lesser CRM entity)
         if len(column_names_parts) == 1:
@@ -188,8 +190,8 @@ class GristDataParser:
                     matched = True
                 elif re.match('E42_.*', column_name):
                     E42_type = remove_trailing_integers(column_name.replace('E42_', ''))
-                    if E42_type in self.E42_E55_BY_CODE:
-                        self.make_E42(subject, column_value, self.E42_E55_BY_CODE[E42_type])
+                    if E42_type in self.grist_mapping_data[MappingDataType.E42_E55]:
+                        self.make_E42(subject, column_value, self.grist_mapping_data[MappingDataType.E42_E55][E42_type])
                         matched = True
                     else:
                         self.unknown_E42_id.add(E42_type)
