@@ -5,9 +5,11 @@ from pprint import pprint
 from .GristMappingData import MappingDataType, GristMappingData, GristMappingDataCodeToUuid
 from .GristDataParser import GristDataParser
 
-print('🌲' * 69)
-print('🌲' * 31 + '      📡      ' + '🌲' * 31)
-print('🌲' * 69)
+print('🌲🌲🌲🌲🌲')
+print('🌲      🌲')
+print('🌲  📡  🌲')
+print('🌲      🌲')
+print('🌲🌲🌲🌲🌲')
 
 parser = argparse.ArgumentParser()
 
