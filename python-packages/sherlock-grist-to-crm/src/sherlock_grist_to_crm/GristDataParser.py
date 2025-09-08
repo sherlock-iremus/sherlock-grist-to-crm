@@ -109,7 +109,7 @@ class GristDataParser:
         self.unprocessed_column_names = set()
 
         self.grist_records = grist_records
-        print(f"🌲 {len(self.grist_records)} records fetched from Grist.")
+        print(f"✨ {len(self.grist_records)} records fetched.")
         self.process_records()
 
     def __del__(self):
@@ -117,13 +117,12 @@ class GristDataParser:
         self.graph.serialize(destination=self.output_ttl, encoding='utf-8')
 
     def log(self):
-        print('🌲' * 69)
-        print('WHEN MAKING TTL DATA IN :', self.output_ttl)
-        print('UNKNOWN E35 ID          :', ' • '.join((self.unknown_E35_id)))
-        print('UNKNOWN E41 ID          :', ' • '.join((self.unknown_E41_id)))
-        print('UNKNOWN E42 ID          :', ' • '.join((self.unknown_E42_id)))
-        print('UNPROCESSED COLUMN NAMES:', ' • '.join(sorted(self.unprocessed_column_names)))
-        print('PROCESSED COLUMN NAMES. :', ' • '.join(sorted(self.processed_column_names)))
+        print('🪵  MAKING TTL DATA IN      :', self.output_ttl)
+        print('🪵  UNKNOWN E35 ID          :', ' • '.join((self.unknown_E35_id)))
+        print('🪵  UNKNOWN E41 ID          :', ' • '.join((self.unknown_E41_id)))
+        print('🪵  UNKNOWN E42 ID          :', ' • '.join((self.unknown_E42_id)))
+        print('🪵  UNPROCESSED COLUMN NAMES:', ' • '.join(sorted(self.unprocessed_column_names)))
+        print('🪵  PROCESSED COLUMN NAMES  :', ' • '.join(sorted(self.processed_column_names)))
 
     def process_records(self):
         for record in self.grist_records:
@@ -166,8 +165,6 @@ class GristDataParser:
 
         matched = False
 
-        print(column_name, column_names_parts, column_value)
-
         # We have a predicate! (or a predicate that points to a lesser CRM entity)
         if len(column_names_parts) == 1:
             # First we check if it's a RDF property
@@ -186,7 +183,7 @@ class GristDataParser:
                     self.make_E52(subject, column_value)
                     matched = True
                 elif re.match('P3_.*', column_name):
-                    self.make_P3(subject, column_value, self.P3_E55_BY_CODE[remove_trailing_integers(column_name.replace('P3_', ''))])
+                    self.make_P3(subject, column_value, self.grist_mapping_data[MappingDataType.P3_E55][remove_trailing_integers(column_name.replace('P3_', ''))])
                     matched = True
                 elif re.match('E42_.*', column_name):
                     E42_type = remove_trailing_integers(column_name.replace('E42_', ''))
@@ -197,15 +194,15 @@ class GristDataParser:
                         self.unknown_E42_id.add(E42_type)
                 elif re.match('E35_.*', column_name):
                     E35_type = remove_trailing_integers(column_name.replace('E35_', ''))
-                    if E35_type in self.E35_E55_BY_CODE:
-                        self.make_E35(subject, column_value, self.E35_E55_BY_CODE[E35_type])
+                    if E35_type in self.grist_mapping_data[MappingDataType.E35_E55]:
+                        self.make_E35(subject, column_value, self.grist_mapping_data[MappingDataType.E35_E55][E35_type])
                         matched = True
                     else:
                         self.unknown_E35_id.add(E35_type)
                 elif re.match('E41_.*', column_name):
                     E41_type = remove_trailing_integers(column_name.replace('E41_', ''))
-                    if E41_type in self.E41_E55_BY_CODE:
-                        self.make_E41(subject, column_value, self.E41_E55_BY_CODE[E41_type])
+                    if E41_type in self.grist_mapping_data[MappingDataType.E41_E55]:
+                        self.make_E41(subject, column_value, self.grist_mapping_data[MappingDataType.E41_E55][E41_type])
                         matched = True
                     else:
                         self.unknown_E41_id.add(E41_type)
