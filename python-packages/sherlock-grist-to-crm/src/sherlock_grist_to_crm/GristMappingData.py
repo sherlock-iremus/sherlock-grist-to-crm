@@ -3,13 +3,13 @@ from enum import Enum
 
 
 class MappingDataType(Enum):
-    E35_E55 = 'e35_e55_grist_table_id'
-    E41_E55 = 'e41_e55_grist_table_id'
-    E42_E55 = 'e42_e55_grist_table_id'
-    P3_E55 = 'p3_e55_grist_table_id'
-    P177_E55 = 'p177_e55_grist_table_id'
-    PROJECTS = 'projects_grist_table_id'
-    RDF_PROPERTIES = 'rdf_properties_grist_table_id'
+    E35_E55 = 'E35_E55'
+    E41_E55 = 'E41_E55'
+    E42_E55 = 'E42_E55'
+    P3_E55 = 'P3_E55'
+    P177_E55 = 'P177_E55'
+    PROJECTS = 'PROJECTS'
+    RDF_PROPERTIES = 'RDF_PROPERTIES'
 
 
 class GristMappingDataCodeToUuid(dict[str, str]):

@@ -209,7 +209,7 @@ class GristDataParser:
                 elif column_name.startswith('E13_'):
                     x = column_name.replace('E13_', '')
                     x = self.project_id + '::' + x
-                    annotation_type_uuid = self.E13_E55_BY_CODE[x]
+                    annotation_type_uuid = self.grist_mapping_data[MappingDataType.P177_E55][x]
                     self.make_E13_with_literal_P141(subject, annotation_type_uuid, column_value)
                     # rdfs:label
                     if x in self.makerdfslabelfrom:
