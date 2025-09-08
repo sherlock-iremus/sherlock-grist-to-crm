@@ -317,7 +317,7 @@ class GristDataParser:
                 localName = '_'.join(column_name_parts[1:-1])
             else:
                 localName = '_'.join(column_name_parts[1:])
-            return self.RDF_PROPERTIES[prefix + ':' + localName]
+            return self.grist_mapping_data[MappingDataType.RDF_PROPERTIES][prefix + ':' + localName]
         return None
 
     def make_p_and_pi(self, x, s, o):
