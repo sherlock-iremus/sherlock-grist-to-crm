@@ -2,14 +2,9 @@ import argparse
 from typing import Dict
 from grist_api_helpers import records
 from pprint import pprint
-from .GristMappingData import MappingDataType, GristMappingData, GristMappingDataCodeToUuid
+import sys
+from .GristMappingData import MappingDataType, GristMappingData, GristMappingDataCodeToUuid, CrmEntities
 from .GristDataParser import GristDataParser
-
-print('🌲🌲🌲🌲🌲')
-print('🌲      🌲')
-print('🌲  📡  🌲')
-print('🌲      🌲')
-print('🌲🌲🌲🌲🌲')
 
 parser = argparse.ArgumentParser()
 
@@ -30,6 +25,12 @@ parser.add_argument('--rdf_type')
 parser.add_argument('--sherlock_collection')
 
 args = parser.parse_args()
+
+print('🌲🌲🌲🌲🌲')
+print('🌲      🌲')
+print('🌲  📡  🌲', args.grist_table_id)
+print('🌲      🌲')
+print('🌲🌲🌲🌲🌲')
 
 ################################################################################
 # FETCH GRIST MAPPING DATA
@@ -61,6 +62,13 @@ if args.project_id:
 else:
     project_uuid = None
 
+sherlock_grist_crm_entities = {}
+sherlock_grist_crm_entities[CrmEntities.E55] = {}
+
+e55_records = records(args.grist_base, args.grist_api_key, args.grist_doc_id, 'SHERLOCK_E55')['records']
+for x in e55_records:
+    sherlock_grist_crm_entities[CrmEntities.E55][str(x['id'])] = x['fields']['UUID']
+
 ################################################################################
 # PARSE DATA
 ################################################################################
@@ -80,6 +88,7 @@ gdp = GristDataParser(
     p2_has_type=args.p2_has_type,
     rdf_type=args.rdf_type,
     sherlock_collection=args.sherlock_collection,
+    sherlock_grist_crm_entities=sherlock_grist_crm_entities
 )
 
 del gdp

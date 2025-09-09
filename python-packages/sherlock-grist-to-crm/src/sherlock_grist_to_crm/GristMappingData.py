@@ -2,6 +2,10 @@ from dataclasses import dataclass, field
 from enum import Enum
 
 
+class CrmEntities(Enum):
+    E55 = 'E55'
+
+
 class MappingDataType(Enum):
     E35_E55 = 'E35_E55'
     E41_E55 = 'E41_E55'

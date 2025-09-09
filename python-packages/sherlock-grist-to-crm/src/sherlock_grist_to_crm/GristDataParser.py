@@ -2,7 +2,7 @@ from rdflib import Graph, Literal, Namespace, RDF, RDFS, SKOS, URIRef, XSD
 import re
 import uuid
 from pprint import pprint
-from .GristMappingData import GristMappingData, MappingDataType
+from .GristMappingData import CrmEntities, GristMappingData, MappingDataType
 
 ################################################################################
 # RDF SERIALIZATION CONSTANTS
@@ -85,7 +85,8 @@ class GristDataParser:
         p2_has_type: str,
         rdf_type: str,
         sherlock_collection: str,
-        grist_records
+        grist_records,
+        sherlock_grist_crm_entities
     ):
 
         self.e13_authors = [URIRef(x) for x in e13_authors]
@@ -98,6 +99,7 @@ class GristDataParser:
         self.project_uuid = project_uuid
         self.rdf_type = rdf_type
         self.sherlock_collection = sherlock_collection
+        self.sherlock_grist_crm_entities = sherlock_grist_crm_entities
 
         self.rdf_properties_prefixes = set()
         for x in grist_mapping_data[MappingDataType.RDF_PROPERTIES].keys():
@@ -177,6 +179,11 @@ class GristDataParser:
                 if re.match('P1_', column_name):
                     self.graph.add((subject, CRM.P1_is_identified_by, Literal(column_value)))
                     matched = True
+                elif re.match('P2_has_type', column_name):
+                    if column_name != 0:
+                        column_value = str(column_value)
+                        if column_value in self.sherlock_grist_crm_entities[CrmEntities.E55]:
+                            self.graph.add((subject, CRM.P2_has_type, SHERLOCK_DATA[self.sherlock_grist_crm_entities[CrmEntities.E55][column_value]]))
                 elif re.match('P102_', column_name):
                     self.graph.add((subject, CRM.P102_has_title, Literal(column_value)))
                     matched = True
