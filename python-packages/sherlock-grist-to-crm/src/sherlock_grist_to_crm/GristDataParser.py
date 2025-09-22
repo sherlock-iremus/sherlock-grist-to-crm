@@ -156,7 +156,10 @@ class GristDataParser:
         pass
 
     def process_cell(self, subject, column_name, column_value):
-        column_value = str(column_value)
+        if not column_value:
+            column_value = ''
+        else:
+            column_value = str(column_value).strip()
         column_name = column_name.strip()
         if column_value:
             column_value = column_value.strip()
@@ -275,6 +278,8 @@ class GristDataParser:
         self.graph.add((pc, CRM['P3.1_has_type'], SHERLOCK_DATA[P3_type]))
 
     def make_E42(self, subject, column_value, E42_type):
+        if not column_value:
+            return
         E42 = URIRef(str(uuid.uuid4()))
         self.graph.add((subject, CRM.P1_is_identified_by, E42))
         self.graph.add((E42, RDF.type, CRM.E42_Identifier))
