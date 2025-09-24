@@ -217,12 +217,14 @@ class GristDataParser:
                         matched = True
                     else:
                         self.unknown_E41_id.add(E41_type)
+                elif column_name == 'sherlock_hasContextProject':
+                    self.graph.add((subject, SHERLOCK.hasContextProject, URIRef(column_value)))
                 elif column_name.startswith('E13_'):
                     x = column_name.replace('E13_', '')
                     annotation_type_uuid = self.grist_mapping_data[MappingDataType.P177_E55][x.replace('__', '::')]
                     self.make_E13_with_literal_P141(subject, annotation_type_uuid, column_value)
                     # rdfs:label
-                    if x in self.makerdfslabelfrom:
+                    if x.replace('__', '::') in self.makerdfslabelfrom:
                         current_rdfs_label_value = self.graph.value(subject=subject, predicate=RDFS.label)
                         if current_rdfs_label_value:
                             self.graph.remove((subject, RDFS.label, Literal(current_rdfs_label_value)))
