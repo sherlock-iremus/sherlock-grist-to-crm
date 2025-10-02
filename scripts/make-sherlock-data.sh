@@ -74,3 +74,4 @@ python3 -m sherlock_grist_to_crm.grist-to-crm $common_args \
     --grist_table_id SHERLOCK_PROJECTS_FILES \
     --output_ttl $BASE_OUTPUT/SHERLOCK-PROJECTS-FILES.ttl \
     --rdf_type http://www.cidoc-crm.org/cidoc-crm/E31_Document \
+    --p2_has_type 66ee2b5c-7d83-43d2-9d6e-d3a4d8443570 \
