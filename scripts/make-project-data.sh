@@ -61,6 +61,7 @@ case "$1" in
         python3 -m sherlock_grist_to_crm.grist-to-crm $common_args \
             --grist_table_id REFAR_PERSONNES \
             --project_id refar-personnes \
+            --sherlock_collection bb8b4c24-4d9f-4790-a710-511e49e5c6b7 \
             --output_ttl $OUTPUT_TTL_ROOT/refar-personnes.ttl \
             --e32_uuid 81366968-0fc8-43f6-9a32-9609c19a33c0 \
             --rdf_type http://www.cidoc-crm.org/cidoc-crm/E21_Person \

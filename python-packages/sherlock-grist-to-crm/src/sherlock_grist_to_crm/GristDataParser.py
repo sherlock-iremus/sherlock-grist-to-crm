@@ -147,7 +147,7 @@ class GristDataParser:
                 self.graph.add((SHERLOCK_DATA[self.e32_uuid], CRM.P71_lists, subject))
 
             if self.project_uuid:
-                self.graph.add((subject, SHERLOCK['hasContextProject'], URIRef(self.project_uuid)))
+                self.graph.add((subject, SHERLOCK['has_context_project'], URIRef(self.project_uuid)))
 
             for column_name, column_value in record['fields'].items():
                 self.process_cell(subject, column_name, column_value)
@@ -217,8 +217,8 @@ class GristDataParser:
                         matched = True
                     else:
                         self.unknown_E41_id.add(E41_type)
-                elif column_name == 'sherlock_hasContextProject':
-                    self.graph.add((subject, SHERLOCK.hasContextProject, URIRef(column_value)))
+                elif column_name == 'sherlock__has_context_project':
+                    self.graph.add((subject, SHERLOCK.has_context_project, URIRef(column_value)))
                 elif column_name.startswith('E13_'):
                     x = column_name.replace('E13_', '')
                     annotation_type_uuid = self.grist_mapping_data[MappingDataType.P177_E55][x.replace('__', '::')]
@@ -320,17 +320,13 @@ class GristDataParser:
         for e13_author in self.e13_authors:
             self.graph.add((E13, CRM.P14_carried_out_by, e13_author))
         if self.project_uuid:
-            self.graph.add((E13, SHERLOCK.hasContextProject, URIRef(self.project_uuid)))
+            self.graph.add((E13, SHERLOCK.has_context_project, URIRef(self.project_uuid)))
 
     def get_rdf_property_uri(self, column_name):
-        column_name_parts = column_name.split('_')
-        prefix = column_name_parts[0]
-        if prefix in self.rdf_properties_prefixes:
-            localName = ''
-            if column_name_parts[-1].isdigit():
-                localName = '_'.join(column_name_parts[1:-1])
-            else:
-                localName = '_'.join(column_name_parts[1:])
+        match = re.search(r"(.+)__(.+?)(?=(_[0-9]+)?$)", column_name)
+        if match:
+            prefix = match.group(1)
+            localName = match.group(2)
             return self.grist_mapping_data[MappingDataType.RDF_PROPERTIES][prefix + ':' + localName]
         return None
 
