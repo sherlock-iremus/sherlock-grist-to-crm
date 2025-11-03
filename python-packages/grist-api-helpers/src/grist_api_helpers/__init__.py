@@ -1,6 +1,7 @@
 import requests
 from requests.adapters import HTTPAdapter
 import time
+from typing import Any
 import urllib3
 from urllib3.exceptions import InsecureRequestWarning
 from urllib3.util.retry import Retry
@@ -15,7 +16,7 @@ session.mount('http://', adapter)
 session.mount('https://', adapter)
 
 
-def get(base, api_key, path):
+def get(base: str, api_key: str, path: str) -> Any:
     return session.get(
         f"{base}{path}",
         headers={
@@ -26,33 +27,33 @@ def get(base, api_key, path):
     ).json()
 
 
-def orgs(base, api_key):
+def orgs(base: str, api_key: str):
     return get(base, api_key, "/orgs")
 
 
-def orgs_iremus(base, api_key):
+def orgs_iremus(base: str, api_key: str):
     return get(base, api_key, "/orgs/iremus")
 
 
-def workspace(base, api_key, id):
+def workspace(base: str, api_key: str, id: str):
     return get(base, api_key, f"/workspaces/{id}")
 
 
-def records(base, api_key, doc_id, table_id):
-    time.sleep(1)
+def records(base: str, api_key: str, doc_id: str, table_id: str) -> Any:
+    time.sleep(0.3)
     return get(base, api_key, f"/docs/{doc_id}/tables/{table_id}/records")
 
 
-def encode_filter(parameter, value):
+def encode_filter(parameter: str, value: str):
     return f"%7B%22{parameter}%22%3A%20%5B%22{value}%22%5D%7D"
 
 
-def records_by_column(base, api_key, doc_id, table_id, column, value):
+def records_by_column(base: str, api_key: str, doc_id: str, table_id: str, column: str, value: str):
     u = f"/docs/{doc_id}/tables/{table_id}/records?filter={encode_filter(column, value)}"
     return get(base, api_key, u)
 
 
-def put_record(base, api_key, doc_id, table_id, data):
+def put_record(base: str, api_key: str, doc_id: str, table_id: str, data: str):
     return session.put(
         f"{base}/docs/{doc_id}/tables/{table_id}/records",
         headers={
@@ -64,11 +65,11 @@ def put_record(base, api_key, doc_id, table_id, data):
     ).json()
 
 
-def columns(base, api_key, doc_id, table_id):
+def columns(base: str, api_key: str, doc_id: str, table_id: str):
     return get(base, api_key, f"/docs/{doc_id}/tables/{table_id}/columns")
 
 
-def patch_record(base, api_key, doc_id, table_id, data):
+def patch_record(base: str, api_key: str, doc_id: str, table_id: str, data: Any):
     return session.put(
         f"{base}/docs/{doc_id}/tables/{table_id}/records",
         headers={
@@ -80,7 +81,7 @@ def patch_record(base, api_key, doc_id, table_id, data):
     ).json()
 
 
-def post_attachment(base, api_key, doc_id, f):
+def post_attachment(base: str, api_key: str, doc_id: str, f):
     return session.post(
         f"{base}/docs/{doc_id}/attachments",
         headers={"Authorization": f"Bearer {api_key}"},
@@ -88,5 +89,5 @@ def post_attachment(base, api_key, doc_id, f):
     ).json()
 
 
-def tables(base, api_key, doc_id):
+def tables(base: str, api_key: str, doc_id: str):
     return get(base, api_key, f"/docs/{doc_id}/tables")

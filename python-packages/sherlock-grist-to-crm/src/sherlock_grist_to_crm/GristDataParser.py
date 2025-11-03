@@ -1,8 +1,8 @@
 from rdflib import Graph, Literal, Namespace, RDF, RDFS, SKOS, URIRef, XSD
 import re
 import uuid
-from pprint import pprint
 from .GristMappingData import CrmEntities, GristMappingData, MappingDataType
+from pprint import pprint
 
 ################################################################################
 # RDF SERIALIZATION CONSTANTS
@@ -10,6 +10,7 @@ from .GristMappingData import CrmEntities, GristMappingData, MappingDataType
 
 SHERLOCK_DATA = Namespace("http://data-iremus.huma-num.fr/id/")
 CRM = Namespace("http://www.cidoc-crm.org/cidoc-crm/")
+LRMOO = Namespace('http://iflastandards.info/ns/lrm/lrmoo/')
 SHERLOCK = Namespace("http://data-iremus.huma-num.fr/ns/sherlock#")
 
 ################################################################################
@@ -22,11 +23,7 @@ DIRECT_PROPERTIES = {
     'P94_has_created': 'P94i_was_created_by',
 }
 
-INVERSE_PROPERTIES = {
-    'P9i_forms_part_of': 'P9_consists_of',
-    'P70i_is_documented_in': 'P70_Documents',
-    'P94i_was_created_by': 'P94_has_created',
-}
+INVERSE_PROPERTIES = {v: k for k, v in DIRECT_PROPERTIES.items()}
 
 ENTITIES_CODE_TO_CLASS_URI = {
     'E65': CRM.E65_Creation
@@ -37,34 +34,35 @@ ENTITIES_CODE_TO_CLASS_URI = {
 ################################################################################
 
 
-def hash_string_to_uuid(string):
+def hash_string_to_uuid(string: str):
     namespace = uuid.NAMESPACE_DNS
     return uuid.uuid5(namespace, string)
 
 
-def remove_trailing_integers(s):
+def remove_trailing_integers(s: str):
     return re.sub(r'\d+$', '', s)
 
 
 def make_graph():
     g = Graph(base=str(SHERLOCK_DATA))
     g.bind("crm", CRM)
+    g.bind("lrmoo", LRMOO)
     g.bind("sherlock", SHERLOCK)
     return g
 
 
-def get_entity_uri_by_code(code):
+def get_entity_uri_by_code(code: str):
     if code not in ENTITIES_CODE_TO_CLASS_URI:
         raise ValueError(f'Unknown entity code: "{code}"')
     return ENTITIES_CODE_TO_CLASS_URI[code]
 
 
-def format_crm_property(p):
+def format_crm_property(p: str) -> URIRef:
     if p.startswith('crm:'):
         p = p.replace('crm:', '')
     if not p.startswith(str(CRM)):
         p = CRM[p]
-    return p
+    return URIRef(p)
 
 
 ################################################################################
@@ -105,11 +103,11 @@ class GristDataParser:
         for x in grist_mapping_data[MappingDataType.RDF_PROPERTIES].keys():
             self.rdf_properties_prefixes.add(x.split(':')[0])
         self.graph = make_graph()
-        self.unknown_E35_id = set()
-        self.unknown_E41_id = set()
-        self.unknown_E42_id = set()
-        self.processed_column_names = set()
-        self.unprocessed_column_names = set()
+        self.unknown_E35_id: set[str] = set()
+        self.unknown_E41_id: set[str] = set()
+        self.unknown_E42_id: set[str] = set()
+        self.processed_column_names: set[str] = set()
+        self.unprocessed_column_names: set[str] = set()
 
         self.grist_records = grist_records
         print(f"✨ {len(self.grist_records)} records fetched.")
@@ -147,15 +145,12 @@ class GristDataParser:
                 self.graph.add((SHERLOCK_DATA[self.e32_uuid], CRM.P71_lists, subject))
 
             if self.project_uuid:
-                self.graph.add((subject, SHERLOCK['has_context_project'], URIRef(self.project_uuid)))
+                self.graph.add((subject, SHERLOCK['has_context_project'], SHERLOCK_DATA[self.project_uuid]))
 
             for column_name, column_value in record['fields'].items():
                 self.process_cell(subject, column_name, column_value)
 
-    def process_record(self):
-        pass
-
-    def process_cell(self, subject, column_name, column_value):
+    def process_cell(self, subject: URIRef, column_name: str, column_value: str):
         if not column_value:
             column_value = ''
         else:
@@ -218,7 +213,8 @@ class GristDataParser:
                     else:
                         self.unknown_E41_id.add(E41_type)
                 elif column_name == 'sherlock__has_context_project':
-                    self.graph.add((subject, SHERLOCK.has_context_project, URIRef(column_value)))
+                    self.graph.add((subject, SHERLOCK.has_context_project, SHERLOCK_DATA[column_value]))
+                    matched = True
                 elif column_name.startswith('E13_'):
                     x = column_name.replace('E13_', '')
                     annotation_type_uuid = self.grist_mapping_data[MappingDataType.P177_E55][x.replace('__', '::')]
@@ -230,19 +226,28 @@ class GristDataParser:
                             self.graph.remove((subject, RDFS.label, Literal(current_rdfs_label_value)))
                         else:
                             current_rdfs_label_value = ''
-                        new_rdfs_label = ' • '.join(filter(lambda x: x, [current_rdfs_label_value, column_value]))
+                        new_rdfs_label: str = ' • '.join(filter(lambda x: x, [current_rdfs_label_value, column_value]))
                         self.graph.add((subject, RDFS.label, Literal(new_rdfs_label)))
                     matched = True
+                elif column_name == 'R5i_is_component_of':
+                    self.graph.add((subject, LRMOO.R5i_is_component_of, URIRef(column_value)))
+                    self.graph.add((URIRef(column_value), LRMOO.R5_has_component, subject))
+                    matched = True
                 elif column_value != '0':
-                    if column_name in DIRECT_PROPERTIES.keys() or column_name in INVERSE_PROPERTIES.keys():
-                        self.make_p_and_pi(column_name, subject, URIRef(column_value))
+                    if column_name in DIRECT_PROPERTIES.keys():
+                        self.graph.add((subject, format_crm_property(column_name), URIRef(column_value)))
+                        self.graph.add((URIRef(column_value), format_crm_property(DIRECT_PROPERTIES[column_name]), subject))
+                        matched = True
+                    elif column_name in INVERSE_PROPERTIES.keys():
+                        self.graph.add((subject, format_crm_property(column_name), URIRef(column_value)))
+                        self.graph.add((URIRef(column_value), format_crm_property(INVERSE_PROPERTIES[column_name]), subject))
                         matched = True
         if len(column_names_parts) == 3:
             # Properties creation
             p1 = column_names_parts[0]
-            p1i = None
+            p1i = ''
             p2 = column_names_parts[2]
-            p2i = None
+            p2i = ''
             if p1 in DIRECT_PROPERTIES:
                 p1i = DIRECT_PROPERTIES[p1]
             elif p1 in INVERSE_PROPERTIES:
@@ -266,20 +271,20 @@ class GristDataParser:
         else:
             self.processed_column_names.add(column_name)
 
-    def make_E52(self, subject, P82aP82b_column_value, graph):
+    def make_E52(self, subject: URIRef, P82aP82b_column_value: str):
         E52 = URIRef(str(uuid.uuid4()))
         self.graph.add((subject, CRM['P4_has_time-span'], E52))
         self.graph.add((E52, CRM.P82a_begin_of_the_begin, Literal(P82aP82b_column_value, datatype=XSD.dateTime)))
         self.graph.add((E52, CRM.P82b_end_of_the_end, Literal(P82aP82b_column_value, datatype=XSD.dateTime)))
 
-    def make_P3(self, subject, column_value, P3_type):
+    def make_P3(self, subject: URIRef, column_value: str, P3_type: str):
         pc = URIRef(str(uuid.uuid4()))
         self.graph.add((pc, RDF.type, CRM.PC3_has_note))
         self.graph.add((pc, CRM.P01_has_domain, subject))
         self.graph.add((pc, CRM.P03_has_range_literal, Literal(column_value)))
         self.graph.add((pc, CRM['P3.1_has_type'], SHERLOCK_DATA[P3_type]))
 
-    def make_E42(self, subject, column_value, E42_type):
+    def make_E42(self, subject: URIRef, column_value: URIRef | str, E42_type: str):
         if not column_value:
             return
         E42 = URIRef(str(uuid.uuid4()))
@@ -291,7 +296,7 @@ class GristDataParser:
         else:
             self.graph.add((E42, CRM.P190_has_symbolic_content, Literal(column_value)))
 
-    def make_E35(self, subject, column_value, E35_type):
+    def make_E35(self, subject: URIRef, column_value: str, E35_type: str):
         E35 = URIRef(str(uuid.uuid4()))
         self.graph.add((subject, CRM.P102_has_title, E35))
         self.graph.add((E35, RDF.type, CRM.E35_Title))
@@ -301,7 +306,7 @@ class GristDataParser:
         else:
             self.graph.add((E35, CRM.P190_has_symbolic_content, Literal(column_value)))
 
-    def make_E41(self, subject, column_value, E41_type):
+    def make_E41(self, subject: URIRef, column_value: URIRef | str, E41_type: str):
         E41 = URIRef(str(uuid.uuid4()))
         self.graph.add((subject, CRM.P1_is_identified_by, E41))
         self.graph.add((E41, RDF.type, CRM.E41_Appellation))
@@ -311,7 +316,7 @@ class GristDataParser:
         else:
             self.graph.add((E41, CRM.P190_has_symbolic_content, Literal(column_value)))
 
-    def make_E13_with_literal_P141(self, P140, P177, P141):
+    def make_E13_with_literal_P141(self, P140: URIRef, P177: str, P141: str):
         E13 = URIRef(str(uuid.uuid4()))
         self.graph.add((E13, RDF.type, CRM.E13_Attribute_Assignment))
         self.graph.add((E13, CRM.P140_assigned_attribute_to, P140))
@@ -320,24 +325,17 @@ class GristDataParser:
         for e13_author in self.e13_authors:
             self.graph.add((E13, CRM.P14_carried_out_by, e13_author))
         if self.project_uuid:
-            self.graph.add((E13, SHERLOCK.has_context_project, URIRef(self.project_uuid)))
+            self.graph.add((E13, SHERLOCK.has_context_project, SHERLOCK_DATA[self.project_uuid]))
 
-    def get_rdf_property_uri(self, column_name):
+    def get_rdf_property_uri(self, column_name: str):
+        if column_name.startswith('E13_'):
+            column_name = column_name.replace('E13_', '')
         match = re.search(r"(.+)__(.+?)(?=(_[0-9]+)?$)", column_name)
         if match:
             prefix = match.group(1)
+            if prefix == 'sherlock':
+                return None
             localName = match.group(2)
-            return self.grist_mapping_data[MappingDataType.RDF_PROPERTIES][prefix + ':' + localName]
+            qualified_name = prefix + ':' + localName
+            return self.grist_mapping_data[MappingDataType.RDF_PROPERTIES][qualified_name] if qualified_name in self.grist_mapping_data[MappingDataType.RDF_PROPERTIES] else None
         return None
-
-    def make_p_and_pi(self, x, s, o):
-        p = None
-        pi = None
-        if x in DIRECT_PROPERTIES:
-            p = x
-            pi = DIRECT_PROPERTIES[x]
-        elif x in INVERSE_PROPERTIES:
-            p = INVERSE_PROPERTIES[x]
-            pi = x
-        self.graph.add((s, format_crm_property(p), o))
-        self.graph.add((o, format_crm_property(pi), s))

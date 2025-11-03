@@ -18,7 +18,7 @@ case "$1" in
             --output_ttl $OUTPUT_TTL_ROOT/aam.ttl \
             --rdf_type http://www.cidoc-crm.org/cidoc-crm/E73_Information_Object \
             --e13_authors 447b85ae-53c6-4787-8f63-4c9118023c92,4b310d11-24e4-41b6-b8e3-4fa223ff8fae \
-            --makerdfslabelfrom aam::nom,aam::prenom,aam::qualite \
+            --makerdfslabelfrom aam::nom,aam::prenom,aam::qualite,aam::residence \
         ;;
     "euterpe-oeuvres")
         python3 -m sherlock_grist_to_crm.grist-to-crm $common_args \

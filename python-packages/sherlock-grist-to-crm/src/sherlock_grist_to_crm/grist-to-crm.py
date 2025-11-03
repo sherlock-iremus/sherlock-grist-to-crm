@@ -1,8 +1,5 @@
 import argparse
-from typing import Dict
 from grist_api_helpers import records
-from pprint import pprint
-import sys
 from .GristMappingData import MappingDataType, GristMappingData, GristMappingDataCodeToUuid, CrmEntities
 from .GristDataParser import GristDataParser
 
@@ -40,7 +37,7 @@ print(f"✨ Fetching Grist mapping data from tables:")
 grist_mapping_data: GristMappingData = GristMappingData()
 for x in list(MappingDataType):
     grist_table_id = 'SHERLOCK_' + x.value
-    print(f"   🪨  {grist_table_id} …")
+    print(f"🪨  {grist_table_id} …")
     grist_table_data = records(args.grist_base, args.grist_api_key, args.grist_doc_id, grist_table_id)['records']
     grist_mapping_data[x] = GristMappingDataCodeToUuid()
     match x:
@@ -57,10 +54,7 @@ for x in list(MappingDataType):
             for row in grist_table_data:
                 grist_mapping_data[x][row['fields']['Grist_column_code'].strip()] = row['fields']['UUID'].strip()
 
-if args.project_id:
-    project_uuid = grist_mapping_data[MappingDataType.PROJECTS][args.project_id]
-else:
-    project_uuid = None
+project_uuid: str = grist_mapping_data[MappingDataType.PROJECTS][args.project_id] if args.project_id else ''
 
 sherlock_grist_crm_entities = {}
 sherlock_grist_crm_entities[CrmEntities.E55] = {}
