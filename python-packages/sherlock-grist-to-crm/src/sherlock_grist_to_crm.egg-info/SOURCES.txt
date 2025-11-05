@@ -1,6 +1,7 @@
 LICENSE
 README.md
 pyproject.toml
+src/sherlock_grist_to_crm/GristDataParser.py
 src/sherlock_grist_to_crm/GristMappingData.py
 src/sherlock_grist_to_crm/__init__.py
 src/sherlock_grist_to_crm/grist-to-crm.py

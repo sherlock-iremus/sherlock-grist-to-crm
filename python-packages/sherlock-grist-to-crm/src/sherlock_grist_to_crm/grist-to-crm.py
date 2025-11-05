@@ -69,7 +69,7 @@ for x in e55_records:
 
 print(f"✨ Fetching Grist records from table {args.grist_table_id}…")
 grist_records = records(args.grist_base, args.grist_api_key, args.grist_doc_id, args.grist_table_id)['records']
-
+print(len(grist_records))
 gdp = GristDataParser(
     grist_mapping_data=grist_mapping_data,
     project_id=args.project_id,

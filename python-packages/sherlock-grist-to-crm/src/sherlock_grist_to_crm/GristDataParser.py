@@ -129,6 +129,8 @@ class GristDataParser:
         for record in self.grist_records:
             if 'UUID' in record['fields'].keys() and record['fields']['UUID']:
                 subject = SHERLOCK_DATA[record['fields']['UUID']]
+            else:
+                continue
 
             if self.rdf_type:
                 self.graph.add((subject, RDF.type, URIRef(self.rdf_type)))
