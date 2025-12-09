@@ -40,7 +40,7 @@ def workspace(base: str, api_key: str, id: str):
 
 
 def records(base: str, api_key: str, doc_id: str, table_id: str) -> Any:
-    time.sleep(0.3)
+    time.sleep(0.5)
     return get(base, api_key, f"/docs/{doc_id}/tables/{table_id}/records")
 
 
