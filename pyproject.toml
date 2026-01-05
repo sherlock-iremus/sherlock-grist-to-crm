@@ -1,0 +1,17 @@
+[project]
+name = "sherlock-grist-to-crm"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "dacite>=1.9.2",
+    "pyaml>=25.7.0",
+    "rdflib>=7.5.0",
+    "requests>=2.32.5",
+]
+
+[dependency-groups]
+dev = [
+    "dacite>=1.9.2",
+]
