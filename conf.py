@@ -31,7 +31,7 @@ class SHERLOCK_Tables:
 
 @dataclass
 class Conf:
-    cache_file: str
+    cache_folder: str
     output_ttl_root: str
     grist_defaults: GristDefaults
     sherlock_data: SHERLOCK_Tables

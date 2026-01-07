@@ -26,26 +26,26 @@ case "$1" in
     #         --output_ttl $OUTPUT_TTL_ROOT/euterpe-personnes.ttl \
     #         --rdf_type http://www.cidoc-crm.org/cidoc-crm/E21_Person \
     #     ;;
-    # "mercure-galant-livraisons")
-    #     python3 -m sherlock_grist_to_crm.grist-to-crm $common_args \
-    #         --grist_table_id MG_LIVRAISONS \
-    #         --project_id mercure-galant-tei \
-    #         --sherlock_collection f252113e-7480-43dd-a48f-0f4d07176eab \
-    #         --output_ttl $OUTPUT_TTL_ROOT/mercure-galant-livraisons.ttl \
-    #         --rdf_type http://iflastandards.info/ns/lrm/lrmoo/F2_Expression \
-    #         --e13_authors e6584d49-a83a-4a18-aab7-02ecaa80732b,5d3e1e80-8f04-4a21-a085-f0fd2e1c40aa \
-    #         --p2_has_type http://data-iremus.huma-num.fr/id/901c2bb5-549d-47e9-bd91-7a21d7cbe49f \
-    #     ;;
-    # "mercure-galant-articles")
-    #     python3 -m sherlock_grist_to_crm.grist-to-crm $common_args \
-    #         --grist_table_id MG_ARTICLES \
-    #         --project_id mercure-galant-tei \
-    #         --sherlock_collection 77176a31-2f64-4c47-82d7-fbdda58d776d \
-    #         --output_ttl $OUTPUT_TTL_ROOT/mercure-galant-articles.ttl \
-    #         --rdf_type http://iflastandards.info/ns/lrm/lrmoo/F2_Expression \
-    #         --e13_authors e6584d49-a83a-4a18-aab7-02ecaa80732b,5d3e1e80-8f04-4a21-a085-f0fd2e1c40aa \
-    #         --p2_has_type http://data-iremus.huma-num.fr/id/13f43e00-680a-4a6d-a223-48e8d9bbeaae \
-    #     ;;
+    "mg-livraisons")
+        uv run grist-table-to-json.py \
+            --collection_uuid f252113e-7480-43dd-a48f-0f4d07176eab \
+            --conf ./conf.iremus.yaml \
+            --e13_authors e6584d49-a83a-4a18-aab7-02ecaa80732b,5d3e1e80-8f04-4a21-a085-f0fd2e1c40aa \
+            --grist_table_id MG_LIVRAISONS \
+            --project_business_id mercure-galant-tei \
+            --p2_has_type http://data-iremus.huma-num.fr/id/901c2bb5-549d-47e9-bd91-7a21d7cbe49f \
+            --rdf_type http://iflastandards.info/ns/lrm/lrmoo/F2_Expression \
+        ;;
+    "mg-articles")
+        uv run grist-table-to-json.py \
+            --collection_uuid eae9b2e2-5087-43ca-bff0-6b8127a41a60 \
+            --conf ./conf.iremus.yaml \
+            --e13_authors e6584d49-a83a-4a18-aab7-02ecaa80732b,5d3e1e80-8f04-4a21-a085-f0fd2e1c40aa \
+            --grist_table_id MG_ARTICLES \
+            --project_business_id mercure-galant-tei \
+            --p2_has_type http://data-iremus.huma-num.fr/id/13f43e00-680a-4a6d-a223-48e8d9bbeaae \
+            --rdf_type http://iflastandards.info/ns/lrm/lrmoo/F2_Expression \
+        ;;
     # "refar-personnes")
     #     python3 -m sherlock_grist_to_crm.grist-to-crm $common_args \
     #         --grist_table_id REFAR_PERSONNES \

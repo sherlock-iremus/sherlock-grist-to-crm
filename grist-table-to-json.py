@@ -25,7 +25,7 @@ parser.add_argument('--collection_uuid')
 args = parser.parse_args()
 
 conf: Conf = make_conf(Path(args.conf))
-cache_manager: CacheManager = CacheManager(Path(conf.cache_file), conf)
+cache_manager: CacheManager = CacheManager(Path(conf.cache_folder, "💾.json"), conf)
 
 print('🌲' * 69)
 print('🌲', args.grist_table_id)
