@@ -8,7 +8,7 @@ import uuid
 
 from cache import Cache
 
-SEP = ' ❄️  '
+SEP = ' ❄️ '
 
 ################################################################################
 # RDF SERIALIZATION CONSTANTS
@@ -121,7 +121,6 @@ class DataParser:
         self.unprocessed_column_names: set[str] = set()
 
         self.records = [dacite.from_dict(Record, r) for r in records]
-        print(f"📦 {len(self.records)} records fetched.")
         self.process_records()
 
     def __del__(self):
@@ -190,6 +189,9 @@ class DataParser:
             else:
                 if re.match('P1_', column_name):
                     self.graph.add((subject, CRM.P1_is_identified_by, Literal(column_value)))
+                    matched = True
+                if re.match('P2_has_type', column_name):
+                    self.graph.add((subject, CRM.P2_has_type, URIRef(column_value)))
                     matched = True
                 elif re.match('P102_', column_name):
                     self.graph.add((subject, CRM.P102_has_title, Literal(column_value)))

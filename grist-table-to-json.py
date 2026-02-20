@@ -37,6 +37,8 @@ grist_records = grist_api_helpers.get(
     f"/docs/{args.grist_doc_id or conf.grist_defaults.doc_id}/tables/{args.grist_table_id}/records"
 )
 
+print(f"📦 {len(grist_records["records"])} records fetched")
+
 project_uuid: Optional[str] = None
 if args.project_business_id:
     project_uuid = cache_manager.cache.PROJECTS[args.project_business_id]

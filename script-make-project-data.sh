@@ -9,15 +9,15 @@ case "$1" in
             --project_business_id aam \
             --rdf_type http://www.cidoc-crm.org/cidoc-crm/E73_Information_Object \
         ;;
-    # "euterpe-oeuvres")
-    #     python3 -m sherlock_grist_to_crm.grist-to-crm $common_args \
-    #         --grist_table_id EUTERPE_OEUVRES \
-    #         --project_id euterpe \
-    #         --sherlock_collection b77c7bb2-25e7-4003-8d6d-8b12a722c30b \
-    #         --output_ttl $OUTPUT_TTL_ROOT/euterpe-oeuvres.ttl \
-    #         --rdf_type http://www.cidoc-crm.org/cidoc-crm/E36_Visual_Item \
-    #         --e13_authors e6584d49-a83a-4a18-aab7-02ecaa80732b,5d3e1e80-8f04-4a21-a085-f0fd2e1c40aa \
-    #     ;;
+    "euterpe-oeuvres")
+        uv run grist-table-to-json.py \
+            --collection_uuid b77c7bb2-25e7-4003-8d6d-8b12a722c30b \
+            --conf ./conf.iremus.yaml \
+            --e13_authors e6584d49-a83a-4a18-aab7-02ecaa80732b,5d3e1e80-8f04-4a21-a085-f0fd2e1c40aa \
+            --grist_table_id EUTERPE_OEUVRES \
+            --project_business_id euterpe \
+            --rdf_type http://www.cidoc-crm.org/cidoc-crm/E36_Visual_Item \
+        ;;
     # "euterpe-personnes")
     #     python3 -m sherlock_grist_to_crm.grist-to-crm $common_args \
     #         --grist_table_id EUTERPE_PERSONNES \
