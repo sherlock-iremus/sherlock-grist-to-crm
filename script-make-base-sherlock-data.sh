@@ -58,4 +58,4 @@ uv run grist-table-to-json.py \
     --conf ./conf.iremus.yaml \
     --e32_uuid 3abbb495-7105-4066-89fe-9d4b0474e492 \
     --grist_table_id SHERLOCK_P177_E55 \
-    --rdf_type http://www.cidoc-crm.org/cidoc-crm/E55_Type \
+    --rdf_type http://www.cidoc-crm.org/cidoc-crm/E55_Type
