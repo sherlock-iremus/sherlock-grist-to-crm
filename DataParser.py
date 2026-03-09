@@ -1,7 +1,7 @@
 import dacite
-from dataclasses import dataclass, field, fields, asdict
+from dataclasses import dataclass
 from pathlib import Path
-from rdflib import Graph, Literal, Namespace, RDF, RDFS, SKOS, URIRef, XSD
+from rdflib import Graph, Literal, Namespace, RDF, RDFS, URIRef, XSD
 import re
 from typing import Any, List, Optional
 import uuid
