@@ -2,13 +2,15 @@ import dacite
 from dataclasses import dataclass
 from pathlib import Path
 from rdflib import Graph, Literal, Namespace, RDF, RDFS, URIRef, XSD
+from rich import print
 import re
 from typing import Any, List, Optional
 import uuid
 
 from cache import Cache
 
-SEP = ' ❄️ '
+SEP_NOTOK = " 👾 "
+SEP_OK = " 🌴 "
 
 ################################################################################
 # RDF SERIALIZATION CONSTANTS
@@ -128,13 +130,12 @@ class DataParser:
         self.graph.serialize(destination=self.output_ttl, encoding='utf-8')
 
     def log(self):
-        print('💾 MAKING TTL DATA IN      :', self.output_ttl)
-        print('👾 UNKNOWN E35 ID          :', SEP.join((self.unknown_E35_id)))
-        print('👾 UNKNOWN E41 ID          :', SEP.join((self.unknown_E41_id)))
-        print('👾 UNKNOWN E42 ID          :', SEP.join((self.unknown_E42_id)))
-        print('🔴 UNPROCESSED COLUMN NAMES:', SEP.join(sorted(self.unprocessed_column_names)))
-        print('🟢 PROCESSED COLUMN NAMES  :', SEP.join(sorted(self.processed_column_names)))
-        print('')
+        print('💾 making ttl data in      :', self.output_ttl)
+        print('🚨 unknown e35 id          :', SEP_NOTOK.join((self.unknown_E35_id)))
+        print('🚨 unknown e41 id          :', SEP_NOTOK.join((self.unknown_E41_id)))
+        print('🚨 unknown e42 id          :', SEP_NOTOK.join((self.unknown_E42_id)))
+        print('🚨 unprocessed column names:', SEP_NOTOK.join(sorted(self.unprocessed_column_names)))
+        print('💚 processed column names  :', SEP_OK.join(sorted(self.processed_column_names)))
 
     def process_records(self):
         for record in self.records:

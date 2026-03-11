@@ -1,6 +1,7 @@
 import argparse
 from pathlib import Path
 from typing import Optional
+from rich import print
 
 from cache import CacheManager
 from conf import Conf, make_conf
@@ -27,9 +28,8 @@ args = parser.parse_args()
 conf: Conf = make_conf(Path(args.conf))
 cache_manager: CacheManager = CacheManager(Path(conf.cache_folder, "💾.json"), conf)
 
-print('🌲' * 69)
-print('🌲', args.grist_table_id)
-print('🌲' * 69)
+print('')
+print(f"🗄️  [#00FF00]{args.grist_table_id}[/#00FF00]")
 
 grist_records = grist_api_helpers.get(
     conf.grist_defaults.base,
