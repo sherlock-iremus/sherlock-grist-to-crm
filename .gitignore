@@ -11,3 +11,6 @@ wheels/
 
 conf.*.yaml
 !conf.template.yaml
+
+.idea
+.vscode
