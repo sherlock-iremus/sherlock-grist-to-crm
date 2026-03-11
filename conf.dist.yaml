@@ -1,0 +1,24 @@
+output_ttl_root: /Users/johndoe/repositories/data-ttl/
+
+cache_folder: /Users/johndoe/sherlock-cache/
+
+grist_defaults:
+  api_key:
+  base: https://grist.numerique.gouv.fr/api
+  doc_id:
+
+sherlock_data:
+  E35_E55:
+    grist_table_id: SHERLOCK_E35_E55
+  E41_E55:
+    grist_table_id: SHERLOCK_E41_E55
+  E42_E55:
+    grist_table_id: SHERLOCK_E42_E55
+  P3_E55:
+    grist_table_id: SHERLOCK_P3_E55
+  P177_E55:
+    grist_table_id: SHERLOCK_P177_E55
+  RDF_PROPERTIES:
+    grist_table_id: SHERLOCK_RDF_PROPERTIES
+  PROJECTS:
+    grist_table_id: SHERLOCK_PROJECTS
