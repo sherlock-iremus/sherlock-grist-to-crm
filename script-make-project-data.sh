@@ -46,15 +46,14 @@ case "$1" in
             --p2_has_type http://data-iremus.huma-num.fr/id/13f43e00-680a-4a6d-a223-48e8d9bbeaae \
             --rdf_type http://iflastandards.info/ns/lrm/lrmoo/F2_Expression \
         ;;
-    # "refar-personnes")
-    #     python3 -m sherlock_grist_to_crm.grist-to-crm $common_args \
-    #         --grist_table_id REFAR_PERSONNES \
-    #         --project_id refar-personnes \
-    #         --sherlock_collection bb8b4c24-4d9f-4790-a710-511e49e5c6b7 \
-    #         --output_ttl $OUTPUT_TTL_ROOT/refar-personnes.ttl \
-    #         --e32_uuid 81366968-0fc8-43f6-9a32-9609c19a33c0 \
-    #         --rdf_type http://www.cidoc-crm.org/cidoc-crm/E21_Person \
-    #     ;;
+    "refar-personnes")
+        uv run grist-table-to-json.py \
+            --collection_uuid daec3210-3640-4c7f-8a20-4549f3ccb79c \
+            --conf ./conf.iremus.yaml \
+            --grist_table_id REFAR_PERSONNES \
+            --project_business_id refar-personnes \
+            --rdf_type http://www.cidoc-crm.org/cidoc-crm/E21_Person \
+        ;;
     *)
         echo "Unknown project code: \"$1\""
         ;;

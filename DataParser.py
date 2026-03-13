@@ -27,6 +27,7 @@ SHERLOCK = Namespace("http://data-iremus.huma-num.fr/ns/sherlock#")
 
 DIRECT_PROPERTIES = {
     'P9_consists_of': 'P9i_forms_part_of',
+    'P14_carried_out_by': 'P14i_performed',
     'P70_documents': 'P70i_is_documented_in',
     'P94_has_created': 'P94i_was_created_by',
 }
@@ -140,7 +141,7 @@ class DataParser:
     def process_records(self):
         for record in self.records:
             if 'UUID' in record.fields.keys() and record.fields['UUID']:
-                subject = SHERLOCK_DATA[record.fields['UUID']]
+                subject = SHERLOCK_DATA[record.fields['UUID'].strip()]
             else:
                 continue
 
@@ -164,126 +165,7 @@ class DataParser:
             for column_name, column_value in record.fields.items():
                 self.process_cell(subject, column_name, column_value)
 
-    def process_cell(self, subject: URIRef, column_name: str, column_value: str):
-        if not column_value:
-            column_value = ''
-        else:
-            column_value = str(column_value).strip()
-        column_name = column_name.strip()
-        if column_value:
-            column_value = column_value.strip()
-        if not column_value:
-            return False
-
-        # How many parts?
-        column_names_parts = column_name.split('___')
-
-        matched = False
-
-        # We have a predicate! (or a predicate that points to a lesser CRM entity)
-        if len(column_names_parts) == 1:
-            # First we check if it's a RDF property
-            rdf_property_uri = self.get_rdf_property_uri(column_name)
-            if rdf_property_uri:
-                self.graph.add((subject, URIRef(rdf_property_uri), Literal(column_value)))
-                matched = True
-            else:
-                if re.match('P1_', column_name):
-                    self.graph.add((subject, CRM.P1_is_identified_by, Literal(column_value)))
-                    matched = True
-                if re.match('P2_has_type', column_name):
-                    self.graph.add((subject, CRM.P2_has_type, URIRef(column_value)))
-                    matched = True
-                elif re.match('P102_', column_name):
-                    self.graph.add((subject, CRM.P102_has_title, Literal(column_value)))
-                    matched = True
-                elif re.match('P82aP82b', column_name):
-                    self.make_E52(subject, column_value)
-                    matched = True
-                elif re.match('P3_.*', column_name):
-                    self.make_P3(subject, column_value, self.cache.P3_E55[remove_trailing_integers(column_name.replace('P3_', ''))])
-                    matched = True
-                elif re.match('E42_.*', column_name):
-                    E42_type = remove_trailing_integers(column_name.replace('E42_', ''))
-                    if E42_type in self.cache.E42_E55:
-                        self.make_E42(subject, column_value, self.cache.E42_E55[E42_type])
-                        matched = True
-                    else:
-                        self.unknown_E42_id.add(E42_type)
-                elif re.match('E35_.*', column_name):
-                    E35_type = remove_trailing_integers(column_name.replace('E35_', ''))
-                    if E35_type in self.cache.E35_E55:
-                        self.make_E35(subject, column_value, self.cache.E35_E55[E35_type])
-                        matched = True
-                    else:
-                        self.unknown_E35_id.add(E35_type)
-                elif re.match('E41_.*', column_name):
-                    E41_type = remove_trailing_integers(column_name.replace('E41_', ''))
-                    if E41_type in self.cache.E41_E55:
-                        self.make_E41(subject, column_value, self.cache.E41_E55[E41_type])
-                        matched = True
-                    else:
-                        self.unknown_E41_id.add(E41_type)
-                elif column_name == 'sherlock__has_context_project':
-                    self.graph.add((subject, SHERLOCK.has_context_project, SHERLOCK_DATA[column_value]))
-                    matched = True
-                elif column_name.startswith('E13_'):
-                    x = column_name.replace('E13_', '')
-                    annotation_type_uuid = self.cache.P177_E55[x.replace('__', '::')]
-                    self.make_E13_with_literal_P141(subject, annotation_type_uuid, column_value)
-                    # rdfs:label
-                    if self.makerdfslabelfrom and x.replace('__', '::') in self.makerdfslabelfrom:
-                        current_rdfs_label_value = self.graph.value(subject=subject, predicate=RDFS.label)
-                        if current_rdfs_label_value:
-                            self.graph.remove((subject, RDFS.label, Literal(current_rdfs_label_value)))
-                        else:
-                            current_rdfs_label_value = ''
-                        new_rdfs_label: str = SEP.join(filter(lambda x: x, [current_rdfs_label_value, column_value]))
-                        self.graph.add((subject, RDFS.label, Literal(new_rdfs_label)))
-                    matched = True
-                elif column_name == 'R5i_is_component_of':
-                    self.graph.add((subject, LRMOO.R5i_is_component_of, URIRef(column_value)))
-                    self.graph.add((URIRef(column_value), LRMOO.R5_has_component, subject))
-                    matched = True
-                elif column_value != '0':
-                    if column_name in DIRECT_PROPERTIES.keys():
-                        self.graph.add((subject, format_crm_property(column_name), URIRef(column_value)))
-                        self.graph.add((URIRef(column_value), format_crm_property(DIRECT_PROPERTIES[column_name]), subject))
-                        matched = True
-                    elif column_name in INVERSE_PROPERTIES.keys():
-                        self.graph.add((subject, format_crm_property(column_name), URIRef(column_value)))
-                        self.graph.add((URIRef(column_value), format_crm_property(INVERSE_PROPERTIES[column_name]), subject))
-                        matched = True
-        if len(column_names_parts) == 3:
-            # Properties creation
-            p1 = column_names_parts[0]
-            p1i = ''
-            p2 = column_names_parts[2]
-            p2i = ''
-            if p1 in DIRECT_PROPERTIES:
-                p1i = DIRECT_PROPERTIES[p1]
-            elif p1 in INVERSE_PROPERTIES:
-                p1i = INVERSE_PROPERTIES[p1]
-            if p2 in DIRECT_PROPERTIES:
-                p2i = DIRECT_PROPERTIES[p2]
-            elif p2 in INVERSE_PROPERTIES:
-                p2i = INVERSE_PROPERTIES[p2]
-            # Medium entity creation
-            medium_entity_class_resource = get_entity_uri_by_code(column_names_parts[1])
-            medium_entity_resource = URIRef(str(uuid.uuid4()))
-            self.graph.add((medium_entity_resource, RDF.type, medium_entity_class_resource))
-            # Weaving
-            self.graph.add((subject, format_crm_property(p1), medium_entity_resource))
-            self.graph.add((medium_entity_resource, format_crm_property(p1i), subject))
-            self.graph.add((medium_entity_resource, format_crm_property(p2), URIRef(column_value)))
-            self.graph.add((URIRef(column_value), format_crm_property(p2i), medium_entity_resource))
-            matched = True
-        if matched == False and column_name != 'UUID':
-            self.unprocessed_column_names.add(column_name)
-        else:
-            self.processed_column_names.add(column_name)
-
-    def make_E52(self, subject: URIRef, P82aP82b_column_value: str):
+     def make_E52(self, subject: URIRef, P82aP82b_column_value: str):
         E52 = URIRef(str(uuid.uuid4()))
         self.graph.add((subject, CRM['P4_has_time-span'], E52))
         self.graph.add((E52, CRM.P82a_begin_of_the_begin, Literal(P82aP82b_column_value, datatype=XSD.dateTime)))
@@ -351,3 +233,125 @@ class DataParser:
             qualified_name = prefix + ':' + localName
             return self.cache.RDF_PROPERTIES[qualified_name] if qualified_name in self.cache.RDF_PROPERTIES else None
         return None
+
+
+    def process_cell(self, subject: URIRef, column_name: str, column_value: str):
+        if not column_value:
+            column_value = ''
+        else:
+            column_value = str(column_value).strip()
+        column_name = column_name.strip()
+        if column_value:
+            column_value = column_value.strip()
+        if not column_value:
+            return False
+
+        # How many parts?
+        column_names_parts = column_name.split('___')
+
+        matched = False
+
+        # We have a predicate! (or a predicate that points to a lesser CRM entity)
+        if len(column_names_parts) == 1:
+            # First we check if it's a RDF property
+            rdf_property_uri = self.get_rdf_property_uri(column_name)
+            if rdf_property_uri:
+                self.graph.add((subject, URIRef(rdf_property_uri), Literal(column_value)))
+                matched = True
+            else:
+                if re.match('P1_', column_name):
+                    self.graph.add((subject, CRM.P1_is_identified_by, Literal(column_value)))
+                    matched = True
+                if re.match('P2_has_type', column_name):
+                    self.graph.add((subject, CRM.P2_has_type, URIRef(column_value)))
+                    matched = True
+                elif re.match('P3_.*', column_name):
+                    self.make_P3(subject, column_value, self.cache.P3_E55[remove_trailing_integers(column_name.replace('P3_', ''))])
+                    matched = True
+                elif re.match('E35_.*', column_name):
+                    E35_type = remove_trailing_integers(column_name.replace('E35_', ''))
+                    if E35_type in self.cache.E35_E55:
+                        self.make_E35(subject, column_value, self.cache.E35_E55[E35_type])
+                        matched = True
+                    else:
+                        self.unknown_E35_id.add(E35_type)
+                elif re.match('E41_.*', column_name):
+                    E41_type = remove_trailing_integers(column_name.replace('E41_', ''))
+                    if E41_type in self.cache.E41_E55:
+                        self.make_E41(subject, column_value, self.cache.E41_E55[E41_type])
+                        matched = True
+                    else:
+                        self.unknown_E41_id.add(E41_type)
+                elif re.match('E42_.*', column_name):
+                    E42_type = remove_trailing_integers(column_name.replace('E42_', ''))
+                    if E42_type in self.cache.E42_E55:
+                        self.make_E42(subject, column_value, self.cache.E42_E55[E42_type])
+                        matched = True
+                    else:
+                        self.unknown_E42_id.add(E42_type)
+                elif re.match('P82aP82b', column_name):
+                    self.make_E52(subject, column_value)
+                    matched = True
+                elif re.match('P102_', column_name):
+                    self.graph.add((subject, CRM.P102_has_title, Literal(column_value)))
+                    matched = True
+                elif column_name == 'sherlock__has_context_project':
+                    self.graph.add((subject, SHERLOCK.has_context_project, SHERLOCK_DATA[column_value]))
+                    matched = True
+                elif column_name.startswith('E13_'):
+                    x = column_name.replace('E13_', '')
+                    annotation_type_uuid = self.cache.P177_E55[x.replace('__', '::')]
+                    self.make_E13_with_literal_P141(subject, annotation_type_uuid, column_value)
+                    # rdfs:label
+                    if self.makerdfslabelfrom and x.replace('__', '::') in self.makerdfslabelfrom:
+                        current_rdfs_label_value = self.graph.value(subject=subject, predicate=RDFS.label)
+                        if current_rdfs_label_value:
+                            self.graph.remove((subject, RDFS.label, Literal(current_rdfs_label_value)))
+                        else:
+                            current_rdfs_label_value = ''
+                        new_rdfs_label: str = ' • '.join(filter(lambda x: x, [current_rdfs_label_value, column_value])) # type: ignore
+                        self.graph.add((subject, RDFS.label, Literal(new_rdfs_label)))
+                    matched = True
+                elif column_name == 'R5i_is_component_of':
+                    self.graph.add((subject, LRMOO.R5i_is_component_of, URIRef(column_value)))
+                    self.graph.add((URIRef(column_value), LRMOO.R5_has_component, subject))
+                    matched = True
+                elif column_value != '0':
+                    if column_name in DIRECT_PROPERTIES.keys():
+                        self.graph.add((subject, format_crm_property(column_name), URIRef(column_value)))
+                        self.graph.add((URIRef(column_value), format_crm_property(DIRECT_PROPERTIES[column_name]), subject))
+                        matched = True
+                    elif column_name in INVERSE_PROPERTIES.keys():
+                        self.graph.add((subject, format_crm_property(column_name), URIRef(column_value)))
+                        self.graph.add((URIRef(column_value), format_crm_property(INVERSE_PROPERTIES[column_name]), subject))
+                        matched = True
+        if len(column_names_parts) == 3:
+            # Properties creation
+            p1 = column_names_parts[0]
+            p1i = ''
+            p2 = column_names_parts[2]
+            p2i = ''
+            if p1 in DIRECT_PROPERTIES:
+                p1i = DIRECT_PROPERTIES[p1]
+            elif p1 in INVERSE_PROPERTIES:
+                p1i = INVERSE_PROPERTIES[p1]
+            if p2 in DIRECT_PROPERTIES:
+                p2i = DIRECT_PROPERTIES[p2]
+            elif p2 in INVERSE_PROPERTIES:
+                p2i = INVERSE_PROPERTIES[p2]
+            # Medium entity creation
+            medium_entity_class_resource = get_entity_uri_by_code(column_names_parts[1])
+            medium_entity_resource = URIRef(str(uuid.uuid4()))
+            self.graph.add((medium_entity_resource, RDF.type, medium_entity_class_resource))
+            # Weaving
+            self.graph.add((subject, format_crm_property(p1), medium_entity_resource))
+            self.graph.add((medium_entity_resource, format_crm_property(p1i), subject))
+            self.graph.add((medium_entity_resource, format_crm_property(p2), URIRef(column_value)))
+            self.graph.add((URIRef(column_value), format_crm_property(p2i), medium_entity_resource))
+            matched = True
+        if matched == False and column_name != 'UUID':
+            self.unprocessed_column_names.add(column_name)
+        else:
+            self.processed_column_names.add(column_name)
+
+   
