@@ -29,6 +29,9 @@ Les données des tables Grist, pour lesquelles chaque ligne donne lieu à la cr�
 
 ### Modèle de composition de DOREMUS
 
+- https://repository.ifla.org/rest/api/core/bitstreams/29ee4904-34e2-4ee7-a129-3bebda2f369b/content#page=12
+- https://data.doremus.org/ontology/img/model.composition.png
+
 ```mermaid
 flowchart LR
     F2_Expression -->|R17i_was_created_by| F28_Expression_Creation -->|P9_consists_of| E7_Activity
