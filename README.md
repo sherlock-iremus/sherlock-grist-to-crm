@@ -31,10 +31,6 @@ Les données des tables Grist, pour lesquelles chaque ligne donne lieu à la cr�
 
 Le modèle [DOREMUS](https://data.doremus.org/ontology/) (basé sur une ancienne version de [LRMoo](https://cidoc-crm.org/lrmoo/fm_releases)) génère beaucoup de sous-entités pour établir des faits comme : « Monsieur X et Madame Y ont composé une œuvre. ». Le modèle de composition est illustré [ici](https://data.doremus.org/ontology/img/model.composition.png) et [là](https://repository.ifla.org/rest/api/core/bitstreams/29ee4904-34e2-4ee7-a129-3bebda2f369b/content#page=12). Il repose sur l'idée qu'une Expression (F2) résulte d'un événement de création d'expression (F28)
 
-<div style="border: 1px solid blue; font-family: monospace;">
-<span style="color: red;">caca</span>
-<div>
-
 ```mermaid
 flowchart TB
     F2_Expression -->|R17i_was_created_by| F28_Expression_Creation
