@@ -79,10 +79,10 @@ class Record:
     id: int | str
     fields: dict[str, Any]
 
+
 ################################################################################
 # CLASS
 ################################################################################
-
 
 class DataParser:
 
@@ -165,7 +165,7 @@ class DataParser:
             for column_name, column_value in record.fields.items():
                 self.process_cell(subject, column_name, column_value)
 
-     def make_E52(self, subject: URIRef, P82aP82b_column_value: str):
+    def make_E52(self, subject: URIRef, P82aP82b_column_value: str):
         E52 = URIRef(str(uuid.uuid4()))
         self.graph.add((subject, CRM['P4_has_time-span'], E52))
         self.graph.add((E52, CRM.P82a_begin_of_the_begin, Literal(P82aP82b_column_value, datatype=XSD.dateTime)))
@@ -233,7 +233,6 @@ class DataParser:
             qualified_name = prefix + ':' + localName
             return self.cache.RDF_PROPERTIES[qualified_name] if qualified_name in self.cache.RDF_PROPERTIES else None
         return None
-
 
     def process_cell(self, subject: URIRef, column_name: str, column_value: str):
         if not column_value:
@@ -309,7 +308,7 @@ class DataParser:
                             self.graph.remove((subject, RDFS.label, Literal(current_rdfs_label_value)))
                         else:
                             current_rdfs_label_value = ''
-                        new_rdfs_label: str = ' • '.join(filter(lambda x: x, [current_rdfs_label_value, column_value])) # type: ignore
+                        new_rdfs_label: str = ' • '.join(filter(lambda x: x, [current_rdfs_label_value, column_value]))  # type: ignore
                         self.graph.add((subject, RDFS.label, Literal(new_rdfs_label)))
                     matched = True
                 elif column_name == 'R5i_is_component_of':
@@ -353,5 +352,3 @@ class DataParser:
             self.unprocessed_column_names.add(column_name)
         else:
             self.processed_column_names.add(column_name)
-
-   

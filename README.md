@@ -29,14 +29,20 @@ Les données des tables Grist, pour lesquelles chaque ligne donne lieu à la cr�
 
 ### Modèle de composition de DOREMUS
 
-Le modèle [DOREMUS](https://data.doremus.org/ontology/) (basé sur une ancienne version de [LRMoo](https://cidoc-crm.org/lrmoo/fm_releases)) génère beaucoup de sous-entités pour établir des faits comme : 
-
-- https://repository.ifla.org/rest/api/core/bitstreams/29ee4904-34e2-4ee7-a129-3bebda2f369b/content#page=12
-- https://data.doremus.org/ontology/img/model.composition.png
+Le modèle [DOREMUS](https://data.doremus.org/ontology/) (basé sur une ancienne version de [LRMoo](https://cidoc-crm.org/lrmoo/fm_releases)) génère beaucoup de sous-entités pour établir des faits comme : « Monsieur X et Madame Y ont composé une œuvre. ». Le modèle de composition est illustré [ici](https://data.doremus.org/ontology/img/model.composition.png) et [là](https://repository.ifla.org/rest/api/core/bitstreams/29ee4904-34e2-4ee7-a129-3bebda2f369b/content#page=12). Il repose sur l'idée qu'une Expression (F2) résulte d'un événement de création d'expression (F28)
 
 ```mermaid
-flowchart LR
-    F2_Expression -->|R17i_was_created_by| F28_Expression_Creation -->|P9_consists_of| E7_Activity
-    E7_Activity -->|P14_carried_out_by| E21_Person
-    E7_Activity -->|U31_has_function_of_type| E55_Type
+flowchart TB
+    F2_Expression -->|R17i_was_created_by| F28_Expression_Creation
+    F28_Expression_Creation -->|P9_consists_of| E7a
+    F28_Expression_Creation -->|P9_consists_of| E7b
+    E7a[E7_Activity]
+    E7b[E7_Activity]
+    E55a[E55_Type<br>« Compositeur »]
+    E21a[E21_Person<br>« Monsieur X »]
+    E21b[E21_Person<br>« Madame Y »]
+    E7a -->|P14_carried_out_by| E21a
+    E7a -->|U31_has_function_of_type| E55a
+    E7b -->|P14_carried_out_by| E21b
+    E7b -->|U31_has_function_of_type| E55a
 ```
