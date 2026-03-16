@@ -29,6 +29,8 @@ Les données des tables Grist, pour lesquelles chaque ligne donne lieu à la cr�
 
 ### Modèle de composition de DOREMUS
 
+Le modèle [DOREMUS](https://data.doremus.org/ontology/) (basé sur une ancienne version de [LRMoo](https://cidoc-crm.org/lrmoo/fm_releases)) génère beaucoup de sous-entités pour établir des faits comme : 
+
 - https://repository.ifla.org/rest/api/core/bitstreams/29ee4904-34e2-4ee7-a129-3bebda2f369b/content#page=12
 - https://data.doremus.org/ontology/img/model.composition.png
 
