@@ -24,3 +24,13 @@ Les données des tables Grist, pour lesquelles chaque ligne donne lieu à la cr�
 ## Points techniques
 
 - Le graphe dans lequel iront les données est hors du périmètre de sherlock-grist-to-crm, qui ne génère que des triplets et non des quads.
+
+## Mapper les patterns spécifiques du CIDOC CRM
+
+### Modèle de composition de DOREMUS
+
+```mermaid
+flowchart LR
+    F2_Expression -->|R17i_was_created_by| --> F28_Expression_Creation -->|P9_consists_of| --> E7_Activity -->|P14_carried_out_by| --> E21_Person
+```mermaid
+
