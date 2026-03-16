@@ -47,7 +47,16 @@ flowchart TB
     E7b -->|U31_has_function_of_type| E55_compositeur
 ```
 
+🧑‍🎤 Personnes :
+
+|                 UUID                 | P1_is_identified_by |
+| :----------------------------------: | :-----------------: |
+| 8b318d93-7456-4be0-96b3-fc7dc5ced149 |     Monsieur X      |
+| 4da06569-89ff-491c-b817-b442129bac07 |      Madame Y       |
+
+🎶 Expressions :
+
 |                 UUID                 |                    E55                    |  P14 |
 | :----------------------------------: | :---------------------------------------: | ---: |
-| 8e96230a-9210-4a4d-b502-9e90acc4c8d6 | http://vocab.getty.edu/page/aat/300025671 |    C |
+| ce16f743-517d-4581-920d-598d5fd9d7f0 | http://vocab.getty.edu/page/aat/300025671 |    C |
 ¨
