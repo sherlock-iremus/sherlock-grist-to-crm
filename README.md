@@ -50,9 +50,4 @@ flowchart TB
 |                 UUID                 |                    E55                    |  P14 |
 | :----------------------------------: | :---------------------------------------: | ---: |
 | 8e96230a-9210-4a4d-b502-9e90acc4c8d6 | http://vocab.getty.edu/page/aat/300025671 |    C |
-
-<table border="1">
-<tr><th>Nom</th><th>Age</th></tr>
-<tr><td>Alice</td><td>30</td></tr>
-<tr><td>Bob</td><td>25</td></tr>
-</table>
+¨
