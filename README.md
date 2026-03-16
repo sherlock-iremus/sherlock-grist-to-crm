@@ -31,6 +31,7 @@ Les données des tables Grist, pour lesquelles chaque ligne donne lieu à la cr�
 
 ```mermaid
 flowchart LR
-    F2_Expression -->|R17i_was_created_by| F28_Expression_Creation -->|P9_consists_of| E7_Activity -->|P14_carried_out_by| E21_Person
-```mermaid
-
+    F2_Expression -->|R17i_was_created_by| F28_Expression_Creation -->|P9_consists_of| E7_Activity
+    E7_Activity -->|P14_carried_out_by| E21_Person
+    E7_Activity -->|U31_has_function_of_type| E55_Type
+```
