@@ -56,8 +56,8 @@ flowchart TB
 
 🎶 Table des expressions :
 
-|   UUID   | P1_is_identified_by | 0SEa0_U31_has_function_of_type | 0SEa0_P14 | 0SEb0_U31_has_function_of_type | 0SEb0_P14 |
-| :------: | :-----------------: | :----------------------------: | :-------: | :----------------------------: | :-------: |
-| `UUID-3` |  The Wrath of Code  |        `aat:300025671`         | `UUID-1`  |        `aat:300025671`         | `UUID-2`  |
+|   UUID   | P1_is_identified_by | 0SEa0_U31_has_function_of_type | 0SEa0_P14 | 0SEa0_UUID | 0SEb0_U31_has_function_of_type | 0SEb0_P14 | 0SEb0_UUID |
+| :------: | :-----------------: | :----------------------------: | :-------: | :--------: | :----------------------------: | :-------: | :--------: |
+| `UUID-3` |  The Wrath of Code  |        `aat:300025671`         | `UUID-1`  |  `UUID-4`  |        `aat:300025671`         | `UUID-2`  |  `UUID-5`  |
 
 Le problème avec cette approche, c'est que nous ne pouvons pas connaître le nombre de E7 par F28, et qu'il faut créer autant de jeux de colonnes qu'il y a de E7.
