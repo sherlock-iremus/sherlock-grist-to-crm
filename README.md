@@ -61,3 +61,5 @@ flowchart TB
 | `UUID-3` |  The Wrath of Code  |        `aat:300025671`         | `UUID-1`  |  `UUID-4`  |        `aat:300025671`         | `UUID-2`  |  `UUID-5`  |
 
 Le problème avec cette approche, c'est que nous ne pouvons pas connaître le nombre de E7 par F28, et qu'il faut créer autant de jeux de colonnes qu'il y a de E7.
+
+TODO : reste à connecter les n E7 à l'unique F28.
