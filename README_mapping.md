@@ -1,5 +1,29 @@
 # 🔮 Mapper les patterns spécifiques du CIDOC CRM
 
+## Conventions
+
+## Problématique
+
+Le CRM génère beaucoup de sous-entités. Par exemple, si on veut exprimer le nom du père d'une personne, cela doit passer par une instance de la classe `crm:E67_Birth` :
+
+```mermaid
+flowchart TB
+    E21s[crm:E21_Person<br>« Spock »]
+    E21f[crm:E21_Person<br>« Sarek »]
+    E67[crm:E67_Birth<br>« La naissance de Spock »]
+
+    E67 -->|crm:P98_brought_into_life| E21s
+    E67 -->|crm:P97_from_father| E21f
+```
+
+Mais dans une interface tabulaire, on aimerait simplement saisir les données de cette façon :
+
+| Nom   | Nom du père |
+| ----- | ----------- |
+| Spock | Sarek       |
+
+
+
 ## 🧑‍🎤 Modèle de composition de DOREMUS
 
 Le modèle [DOREMUS](https://data.doremus.org/ontology/) (basé sur une ancienne
@@ -33,18 +57,18 @@ flowchart TB
 
 ### 🗃️🧑‍🎤 Table de `E21_Person`
 
-| Colonnes              | Item 1       | Item 2            |
+| Colonnes              | Record 1     | Record 2          |
 | --------------------- | ------------ | ----------------- |
 | `UUID`                | `UUID-1`     | `UUID-2`    <tr/> |
 | `P1_is_identified_by` | Dan Terminus | Perturbator <tr/> |
 
 ### 🗃️🎶 Table de `F2_Expression`
 
-| Colonnes                          | Colonnes (API)                    | Item 1                                                       | À cacher à l'utilisateur ? | Note    |
+| Colonnes                          | Colonnes (API)                    | Record 1                                                     | À cacher à l'utilisateur ? | Note    |
 | --------------------------------- | --------------------------------- | ------------------------------------------------------------ | :------------------------: | ------- |
-| Identifiant de la F2              | `UUID`                            | `UUID-3`                                                     |             ✅              | <tr/>   |
-| Titre de la F2                    | `P1_is_identified_by`             | The Wrath of Code                                            |                            | <tr/>   |
-| Identifiant du F28 de la F2       | `R17i___F280a0`                   | `UUID-4`                                                     |             ✅              | ♈ <tr/> |
+| Identifiant                       | `UUID`                            | `UUID-3`                                                     |             ✅              | <tr/>   |
+| Titre                             | `P1_is_identified_by`             | The Wrath of Code                                            |                            | <tr/>   |
+| Identifiant du F28                | `R17i___F280a0`                   | `UUID-4`                                                     |             ✅              | ♈ <tr/> |
 | 1<sup>ère</sup> E7                | `F280a0___P9_consists_of___E70a0` | `UUID-5`                                                     |             ✅              | ♊ <tr/> |
 | Fonction de la 1<sup>ère</sup> E7 | `E70a0___U31_had_function`        | [`aat:300025671`](http://vocab.getty.edu/page/aat/300025671) |                            | <tr/>   |
 | Auteur de la 1<sup>ère</sup> E7   | `E70a0___P14_carried_out_by`      | `UUID-1`                                                     |                            | <tr/>   |
