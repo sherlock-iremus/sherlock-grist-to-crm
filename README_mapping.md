@@ -4,23 +4,27 @@
 
 ## Problématique
 
-Le CRM génère beaucoup de sous-entités. Par exemple, si on veut exprimer le nom du père d'une personne, cela doit passer par une instance de la classe `crm:E67_Birth` :
+Le CRM génère beaucoup de sous-entités. Par exemple, si on veut exprimer que la période Tokugawa s'étend de 1603 à 1868, cela doit passer par une instance de la classe `crm:E52_Time-Span` :
 
 ```mermaid
 flowchart TB
-    E21s[crm:E21_Person<br>« Spock »]
-    E21f[crm:E21_Person<br>« Sarek »]
-    E67[crm:E67_Birth<br>« La naissance de Spock »]
+    E4[crm:E4_Period<br>« Période Tokugawa »]
+    E52[crm:E52_Time-Span]
 
-    E67 -->|crm:P98_brought_into_life| E21s
-    E67 -->|crm:P97_from_father| E21f
+    E4 -->|crm:P4_has_time-span| E52
+    E52 -->|crm:P82a_begin_of_the_begin| 1603
+    E52 -->|crm:P82b_end_of_the_end| 1868
+
+    style E4 color:turquoise
+    style 1603 color:turquoise
+    style 1868 color:turquoise
 ```
 
 Mais dans une interface tabulaire, on aimerait simplement saisir les données de cette façon :
 
-| Nom   | Nom du père |
-| ----- | ----------- |
-| Spock | Sarek       |
+| Nom              | Début | Fin  |
+| ---------------- | ----- | ---- |
+| Période Tokugawa | 1603  | 1868 |
 
 Comment préserver cette ergonomie, tout en réalisant la structure CRM souhaitée ?
 
