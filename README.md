@@ -42,9 +42,9 @@ flowchart TB
     E21a[E21_Person<br>« Dan Terminus »]
     E21b[E21_Person<br>« Perturbator »]
     E7a -->|P14_carried_out_by| E21a
-    E7a -->|U31_has_function| E55_compositeur
+    E7a -->|U31_had_function| E55_compositeur
     E7b -->|P14_carried_out_by| E21b
-    E7b -->|U31_has_function| E55_compositeur
+    E7b -->|U31_had_function| E55_compositeur
 ```
 
 🧑‍🎤 Table des personnes :
@@ -56,9 +56,9 @@ flowchart TB
 
 🎶 Table des expressions :
 
-|   UUID   | P1_is_identified_by | 0SEa0_U31_has_function_of_type | 0SEa0_P14 | 0SEa0_UUID | 0SEb0_U31_has_function_of_type | 0SEb0_P14 | 0SEb0_UUID |
-| :------: | :-----------------: | :----------------------------: | :-------: | :--------: | :----------------------------: | :-------: | :--------: |
-| `UUID-3` |  The Wrath of Code  |        `aat:300025671`         | `UUID-1`  |  `UUID-4`  |        `aat:300025671`         | `UUID-2`  |  `UUID-5`  |
+|   UUID   | P1_is_identified_by | 0SE_a0_U31_had_function | 0SE_a0_P14 | 0SE_a0_UUID | 0SE_b0_U31_had_function | 0SE_b0_P14 | 0SE_b0_UUID |
+| :------: | :-----------------: | :---------------------: | :--------: | :---------: | :---------------------: | :--------: | :---------: |
+| `UUID-3` |  The Wrath of Code  |     `aat:300025671`     |  `UUID-1`  |  `UUID-4`   |     `aat:300025671`     |  `UUID-2`  |  `UUID-5`   |
 
 Le problème avec cette approche, c'est que nous ne pouvons pas connaître le nombre de E7 par F28, et qu'il faut créer autant de jeux de colonnes qu'il y a de E7.
 
