@@ -40,21 +40,22 @@ flowchart TB
 
 ### 🗃️🎶 Table des `F2_Expression`
 
-| Colonnes                    | Colonnes (API)        | Item 1            | Commentaire |
-| --------------------------- | --------------------- | ----------------- | ----------- |
-| Identifiant de la F2        | `UUID`                | `UUID-3`          |             |
-| Titre de la F2              | `P1_is_identified_by` | The Wrath of Code |             |
-| Identifiant du F28 de la F2 | `R17i___F280a0`       | `UUID-4`          | `[1]`       |
+| Colonnes                          | Colonnes (API)                    | Item 1                                                       | Cachable ? | Note  |
+| --------------------------------- | --------------------------------- | ------------------------------------------------------------ | :--------: | ----- |
+| Identifiant de la F2              | `UUID`                            | `UUID-3`                                                     |     ✓      |       |
+| Titre de la F2                    | `P1_is_identified_by`             | The Wrath of Code                                            |            |       |
+| Identifiant du F28 de la F2       | `R17i___F280a0`                   | `UUID-4`                                                     |     ✓      | `[1]` |
+| UUID de la 1<sup>ère</sup> E7     | `F280a0___P9_consists_of___E70a0` | `UUID-5`                                                     |     ✓      |       |
+| Fonction de la 1<sup>ère</sup> E7 | `E70a0___U31_had_function`        | [`aat:300025671`](http://vocab.getty.edu/page/aat/300025671) |            |       |
+| Auteur de la 1<sup>ère</sup> E7   | `E70a0___P14_carried_out_by`      | `UUID-1`                                                     |            |       |
+| UUID de la 2<sup>ème</sup> E7     | `F280a0___P9_consists_of___E70a0` | `UUID-6`                                                     |     ✓      |       |
+| Fonction de la 2<sup>ème</sup> E7 | `E70a0___U31_had_function`        | [`aat:300025671`](http://vocab.getty.edu/page/aat/300025671) |            |       |
+| Auteur de la 2<sup>ème</sup> E7   | `E70a0___P14_carried_out_by`      | `UUID-2`                                                     |            |       |
 
   `[1]` On exprime ici que la `F2` est connectée à une `F28` via `R17i`. Grist sert de cache pour les UUID des sous-entités
 
 <!--
-| Fonction de la 1<sup>ère</sup>  E7 | `0SE_E7a_U31_had_function` | [`aat:300025671`](http://vocab.getty.edu/page/aat/300025671) |
-| Auteur de la 1<sup>ère</sup> E7    | `0SE_E7a_P14`              | `UUID-1`                                                     |
-| UUID de la 1<sup>ère</sup> E7      | `0SE_E7a_UUID`             | `UUID-5`                                                     |
-| Fonction de la 2<sup>ème</sup>  E7 | `0SE_E7b_U31_had_function` | [`aat:300025671`](http://vocab.getty.edu/page/aat/300025671) |
-| Auteur de la 2<sup>ème</sup> E7    | `0SE_E7b_P14`              | `UUID-2`                                                     |
-| UUID de la 2<sup>ème</sup> E7      | `0SE_E7b_UUID`             | `UUID-6`                                                     |
+
 -->
 
 Cette approche convient quand on a un nombre « raisonnable » de E7 rattachés au F28, et qu'il est possible de créer un jeu de colonne pour chacun d'entre eux. Dans le cas où ce nombre de E7 pourrait être important et non déterminable en amont, ils devraient être définis dans une table à part.
