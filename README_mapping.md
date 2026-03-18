@@ -14,18 +14,21 @@ rôles tenus dans la création de l'expression.
 
 ```mermaid
 flowchart TB
-    F2_Expression[F2_Expression<br>« The Wrath of Code »] -->|R17i_was_created_by| F28_Expression_Creation
-    F28_Expression_Creation -->|P9_consists_of| E7a
-    F28_Expression_Creation -->|P9_consists_of| E7b
-    E7a[E7_Activity]
-    E7b[E7_Activity]
-    E55_compositeur[E55_Type<br>« Compositeur »]
-    E21a[E21_Person<br>« Dan Terminus »]
-    E21b[E21_Person<br>« Perturbator »]
-    E7a -->|P14_carried_out_by| E21a
-    E7a -->|U31_had_function| E55_compositeur
-    E7b -->|P14_carried_out_by| E21b
-    E7b -->|U31_had_function| E55_compositeur
+    F2[lrmoo:F2_Expression<br>« The Wrath of Code »]
+    F28[lrmoo:F28_Expression_Creation]
+    E7a[crm:E7_Activity]
+    E7b[crm:E7_Activity]
+    E21a[crm:E21_Person<br>« Dan Terminus »]
+    E21b[crm:E21_Person<br>« Perturbator »]
+    E55[crm:E55_Type<br>« Compositeur »]
+    
+    F2 -->|lrmoo:R17i_was_created_by| F28
+    F28 -->|crm:P9_consists_of| E7a
+    F28 -->|crm:P9_consists_of| E7b
+    E7a -->|crm:P14_carried_out_by| E21a
+    E7a -->|doremus:U31_had_function| E55
+    E7b -->|crm:P14_carried_out_by| E21b
+    E7b -->|doremus:U31_had_function| E55
 ```
 
 🗃️🧑‍🎤 Table des `E21_Person` :
