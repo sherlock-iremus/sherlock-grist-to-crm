@@ -30,13 +30,13 @@ Mais dans une interface tabulaire, on aimerait simplement saisir les données de
 
 Comment préserver cette ergonomie, tout en réalisant la structure CRM souhaitée, et en s'assurant que l'on contrôle bien l'URL des sous-entités qui doivent être générées ?
 
-| Colonnes | Colonnes (API) | Record 1         |
-| -------- | -------------- | ---------------- |
-| UUID     | `UUID`         | `UUID-1`         |
-| Nom      | `P1`           | Période Tokugawa |
-|          | `P4___E52a`    | `UUID-2`         |
-| Début    | `E52a___P82a`  | 1603             |
-| Début    | `E52a___P82b`  | 1868             |
+| Colonnes | Colonnes (API) | Record 1         | Cachable à l'utilisateur ? |
+| -------- | -------------- | ---------------- | -------------------------- |
+| UUID     | `UUID`         | `UUID-1`         | ✅<tr/>                     |
+| Nom      | `P1`           | Période Tokugawa | <tr/>                      |
+| E52      | `P4___E52a`    | `UUID-2`         | ✅<tr/>                     |
+| Début    | `E52a___P82a`  | 1603             | <tr/>                      |
+| Début    | `E52a___P82b`  | 1868             | <tr/>                      |
 
 ## 🧑‍🎤 Modèle de composition de DOREMUS
 
