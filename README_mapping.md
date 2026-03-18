@@ -28,7 +28,15 @@ Mais dans une interface tabulaire, on aimerait simplement saisir les données de
 | ---------------- | ----- | ---- |
 | Période Tokugawa | 1603  | 1868 |
 
-Comment préserver cette ergonomie, tout en réalisant la structure CRM souhaitée ?
+Comment préserver cette ergonomie, tout en réalisant la structure CRM souhaitée, et en s'assurant que l'on contrôle bien l'URL des sous-entités qui doivent être générées ?
+
+| Colonnes | Colonnes (API) | Record 1         |
+| -------- | -------------- | ---------------- |
+| UUID     | `UUID`         | `UUID-1`         |
+| Nom      | `P1`           | Période Tokugawa |
+|          | `P4___E52a`    | `UUID-2`         |
+| Début    | `E52a___P82a`  | 1603             |
+| Début    | `E52a___P82b`  | 1868             |
 
 ## 🧑‍🎤 Modèle de composition de DOREMUS
 
@@ -70,17 +78,17 @@ flowchart TB
 
 ### 🗃️🎶 Table de `F2_Expression`
 
-| Colonnes                          | Colonnes (API)                    | Record 1                                                     | À cacher à l'utilisateur ? | Note    |
-| --------------------------------- | --------------------------------- | ------------------------------------------------------------ | :------------------------: | ------- |
-| Identifiant                       | `UUID`                            | `UUID-3`                                                     |             ✅              | <tr/>   |
-| Titre                             | `P1_is_identified_by`             | The Wrath of Code                                            |                            | <tr/>   |
-| Identifiant du F28                | `R17i___F280a0`                   | `UUID-4`                                                     |             ✅              | ♈ <tr/> |
-| 1<sup>ère</sup> E7                | `F280a0___P9_consists_of___E70a0` | `UUID-5`                                                     |             ✅              | ♊ <tr/> |
-| Fonction de la 1<sup>ère</sup> E7 | `E70a0___U31_had_function`        | [`aat:300025671`](http://vocab.getty.edu/page/aat/300025671) |                            | <tr/>   |
-| Auteur de la 1<sup>ère</sup> E7   | `E70a0___P14_carried_out_by`      | `UUID-1`                                                     |                            | <tr/>   |
-| 2<sup>ème</sup> E7                | `F280a0___P9_consists_of___E70a0` | `UUID-6`                                                     |             ✅              | ♊ <tr/> |
-| Fonction de la 2<sup>ème</sup> E7 | `E70a0___U31_had_function`        | [`aat:300025671`](http://vocab.getty.edu/page/aat/300025671) |                            | <tr/>   |
-| Auteur de la 2<sup>ème</sup> E7   | `E70a0___P14_carried_out_by`      | `UUID-2`                                                     |                            | <tr/>   |
+| Colonnes                          | Colonnes (API)        | Record 1                                                     | À cacher à l'utilisateur ? | Note    |
+| --------------------------------- | --------------------- | ------------------------------------------------------------ | :------------------------: | ------- |
+| Identifiant                       | `UUID`                | `UUID-3`                                                     |             ✅              | <tr/>   |
+| Titre                             | `P1`                  | The Wrath of Code                                            |                            | <tr/>   |
+| Identifiant du F28                | `R17i___F280a0`       | `UUID-4`                                                     |             ✅              | ♈ <tr/> |
+| 1<sup>ère</sup> E7                | `F280a0___P9___E70a0` | `UUID-5`                                                     |             ✅              | ♊ <tr/> |
+| Fonction de la 1<sup>ère</sup> E7 | `E70a0___U31`         | [`aat:300025671`](http://vocab.getty.edu/page/aat/300025671) |                            | <tr/>   |
+| Auteur de la 1<sup>ère</sup> E7   | `E70a0___P14`         | `UUID-1`                                                     |                            | <tr/>   |
+| 2<sup>ème</sup> E7                | `F280a0___P9___E70a0` | `UUID-6`                                                     |             ✅              | ♊ <tr/> |
+| Fonction de la 2<sup>ème</sup> E7 | `E70a0___U31`         | [`aat:300025671`](http://vocab.getty.edu/page/aat/300025671) |                            | <tr/>   |
+| Auteur de la 2<sup>ème</sup> E7   | `E70a0___P14`         | `UUID-2`                                                     |                            | <tr/>   |
 
 
 ♈ On exprime ici que la `F2` est connectée à une `F28` via `R17i`. On définit l'UUID de la sous-entité `F28` souhaité dans la cellule.
