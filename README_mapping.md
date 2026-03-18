@@ -40,16 +40,19 @@ flowchart TB
 
 🗃️🎶 Table des `F2_Expression` :
 
-| Colonnes                           | Colonnes (API)             | Item 1                                                       |
-| ---------------------------------- | -------------------------- | ------------------------------------------------------------ |
-| Identifiant de la F2               | `UUID`                     | `UUID-3`                                                     |
-| Titre de la F2                     | `P1_is_identified_by`      | The Wrath of Code                                            |
-| Identifiant du F28 de la F2        | `0SE_F280_UUID`            | `UUID-4`                                                     |
+| Colonnes                    | Colonnes (API)        | Item 1            | Commentaire                                        |
+| --------------------------- | --------------------- | ----------------- | -------------------------------------------------- |
+| Identifiant de la F2        | `UUID`                | `UUID-3`          |                                                    |
+| Titre de la F2              | `P1_is_identified_by` | The Wrath of Code |                                                    |
+| Identifiant du F28 de la F2 | `R17i___F280`         | `UUID-4`          | Grist sert de cache pour les UUID des sous-entités |
+
+<!--
 | Fonction de la 1<sup>ère</sup>  E7 | `0SE_E7a_U31_had_function` | [`aat:300025671`](http://vocab.getty.edu/page/aat/300025671) |
 | Auteur de la 1<sup>ère</sup> E7    | `0SE_E7a_P14`              | `UUID-1`                                                     |
 | UUID de la 1<sup>ère</sup> E7      | `0SE_E7a_UUID`             | `UUID-5`                                                     |
 | Fonction de la 2<sup>ème</sup>  E7 | `0SE_E7b_U31_had_function` | [`aat:300025671`](http://vocab.getty.edu/page/aat/300025671) |
 | Auteur de la 2<sup>ème</sup> E7    | `0SE_E7b_P14`              | `UUID-2`                                                     |
 | UUID de la 2<sup>ème</sup> E7      | `0SE_E7b_UUID`             | `UUID-6`                                                     |
+-->
 
 Cette approche convient quand on a un nombre « raisonnable » de E7 rattachés au F28, et qu'il est possible de créer un jeu de colonne pour chacun d'entre eux. Dans le cas où ce nombre de E7 pourrait être important et non déterminable en amont, ils devraient être définis dans une table à part.
