@@ -8,14 +8,16 @@ Le CRM génère beaucoup de sous-entités. Par exemple, si on veut exprimer que 
 
 ```mermaid
 flowchart TB
-    E4[crm:E4_Period<br>« Période Tokugawa »]
-    E52[crm:E52_Time-Span]
+    E4[Instance de<br>crm:E4_Period]
+    E52[Instance de<br>crm:E52_Time-Span]
+    P1[« Période Tokugawa »]
 
+    E4 -->|crm:P1_is_identified_by| P1
     E4 -->|crm:P4_has_time-span| E52
     E52 -->|crm:P82a_begin_of_the_begin| 1603
     E52 -->|crm:P82b_end_of_the_end| 1868
 
-    style E4 color:turquoise
+    style P1 color:turquoise
     style 1603 color:turquoise
     style 1868 color:turquoise
 ```
