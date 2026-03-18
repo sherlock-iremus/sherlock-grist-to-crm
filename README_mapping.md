@@ -31,14 +31,14 @@ flowchart TB
     E7b -->|doremus:U31_had_function| E55
 ```
 
-### 🗃️🧑‍🎤 Table des `E21_Person` :
+### 🗃️🧑‍🎤 Table des `E21_Person`
 
 | Colonnes              | Item 1       | Item 2      |
 | --------------------- | ------------ | ----------- |
 | `UUID`                | `UUID-1`     | `UUID-2`    |
 | `P1_is_identified_by` | Dan Terminus | Perturbator |
 
-### 🗃️🎶 Table des `F2_Expression` :
+### 🗃️🎶 Table des `F2_Expression`
 
 | Colonnes                    | Colonnes (API)        | Item 1            | Commentaire |
 | --------------------------- | --------------------- | ----------------- | ----------- |
