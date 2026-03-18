@@ -22,7 +22,7 @@ Mais dans une interface tabulaire, on aimerait simplement saisir les données de
 | ----- | ----------- |
 | Spock | Sarek       |
 
-
+Comment préserver cette ergonomie, tout en réalisant la structure CRM souhaitée ?
 
 ## 🧑‍🎤 Modèle de composition de DOREMUS
 
