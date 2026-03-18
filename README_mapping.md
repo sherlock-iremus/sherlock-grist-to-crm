@@ -17,9 +17,9 @@ flowchart TB
     E52 -->|crm:P82a_begin_of_the_begin| 1603
     E52 -->|crm:P82b_end_of_the_end| 1868
 
-    style P1 color:turquoise
-    style 1603 color:turquoise
-    style 1868 color:turquoise
+    style P1 color:deeppink
+    style 1603 color:deeppink
+    style 1868 color:deeppink
 ```
 
 Mais dans une interface tabulaire, on aimerait simplement saisir les données de cette façon :
