@@ -28,17 +28,27 @@ il faut pouvoir spécifier :
   `crm:E55_Type` liés à la ressource par le prédicat `crm:P2_has_type`) ;
 - s'il y a des annotations `crm:E13_Attribbute_Assignment`, quels en sont les
   auteurs (des `crm:E21_Person` via la prédicat `crm:P14_carried_out_by`) ;
+- le projet (`crm:E7_Activity`) dans le contexte duquel
+  (`sherlock:has_context_project`) la ressource a été produite ;
 - si nécessaire, comment générer (à partir de quelles colonnes) un `rdfs:label`.
 
 ## 🎆 Remarques techniques
 
-- Le graphe dans lequel iront les données est hors du périmètre de sherlock-grist-to-crm, qui ne génère que des triplets et non des quads.
+- Le graphe dans lequel iront les données est hors du périmètre de
+  sherlock-grist-to-crm, qui ne génère que des triplets et non des quads.
 
 ## 🔮 Mapper les patterns spécifiques du CIDOC CRM
 
 ### 🧑‍🎤 Modèle de composition de DOREMUS
 
-Le modèle [DOREMUS](https://data.doremus.org/ontology/) (basé sur une ancienne version de [LRMoo](https://cidoc-crm.org/lrmoo/fm_releases)) génère beaucoup de sous-entités pour établir des faits comme : « Dan Terminus et Perturbator ont composé *The Wrath of Code*. ». Le modèle de composition est illustré [ici](https://data.doremus.org/ontology/img/model.composition.png) et [là](https://repository.ifla.org/rest/api/core/bitstreams/29ee4904-34e2-4ee7-a129-3bebda2f369b/content#page=12). Il repose sur l'idée qu'une expression (F2) résulte d'un événement de création (F28) qui agrège l'ensemble des activités (E7) qui établissent les différents rôles tenus dans la création de l'expression.
+Le modèle [DOREMUS](https://data.doremus.org/ontology/) (basé sur une ancienne
+version de [LRMoo](https://cidoc-crm.org/lrmoo/fm_releases)) génère beaucoup de
+sous-entités pour établir des faits comme : « Dan Terminus et Perturbator ont
+composé _The Wrath of Code_. ». Le modèle de composition est illustré
+[ici](https://data.doremus.org/ontology/img/model.composition.png) et
+[là](https://repository.ifla.org/rest/api/core/bitstreams/29ee4904-34e2-4ee7-a129-3bebda2f369b/content#page=12).
+Il repose sur l'idée qu'une expression (F2) résulte d'un événement de création
+(F28) qui agrège l'ensemble des activités (E7) qui établissent les différents
 rôles tenus dans la création de l'expression.
 
 ```mermaid
