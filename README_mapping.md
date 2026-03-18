@@ -42,13 +42,13 @@ flowchart TB
 
 | Colonnes                          | Colonnes (API)                    | Item 1                                                       | À cacher à l'utilisateur ? | Note    |
 | --------------------------------- | --------------------------------- | ------------------------------------------------------------ | :------------------------: | ------- |
-| Identifiant de la F2              | `UUID`                            | `UUID-3`                                                     |             ✓              | <tr/>   |
+| Identifiant de la F2              | `UUID`                            | `UUID-3`                                                     |             ✅              | <tr/>   |
 | Titre de la F2                    | `P1_is_identified_by`             | The Wrath of Code                                            |                            | <tr/>   |
-| Identifiant du F28 de la F2       | `R17i___F280a0`                   | `UUID-4`                                                     |             ✓              | ♈ <tr/> |
-| 1<sup>ère</sup> E7                | `F280a0___P9_consists_of___E70a0` | `UUID-5`                                                     |             ✓              | ♊ <tr/> |
+| Identifiant du F28 de la F2       | `R17i___F280a0`                   | `UUID-4`                                                     |             ✅              | ♈ <tr/> |
+| 1<sup>ère</sup> E7                | `F280a0___P9_consists_of___E70a0` | `UUID-5`                                                     |             ✅              | ♊ <tr/> |
 | Fonction de la 1<sup>ère</sup> E7 | `E70a0___U31_had_function`        | [`aat:300025671`](http://vocab.getty.edu/page/aat/300025671) |                            | <tr/>   |
 | Auteur de la 1<sup>ère</sup> E7   | `E70a0___P14_carried_out_by`      | `UUID-1`                                                     |                            | <tr/>   |
-| 2<sup>ème</sup> E7                | `F280a0___P9_consists_of___E70a0` | `UUID-6`                                                     |             ✓              | ♊ <tr/> |
+| 2<sup>ème</sup> E7                | `F280a0___P9_consists_of___E70a0` | `UUID-6`                                                     |             ✅              | ♊ <tr/> |
 | Fonction de la 2<sup>ème</sup> E7 | `E70a0___U31_had_function`        | [`aat:300025671`](http://vocab.getty.edu/page/aat/300025671) |                            | <tr/>   |
 | Auteur de la 2<sup>ème</sup> E7   | `E70a0___P14_carried_out_by`      | `UUID-2`                                                     |                            | <tr/>   |
 
