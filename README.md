@@ -67,29 +67,25 @@ flowchart TB
     E7b -->|U31_had_function| E55_compositeur
 ```
 
-🧑‍🎤 Table des personnes :
+🗃️🧑‍🎤 Table des `E21_Person` :
 
 | Colonnes              | Item 1       | Item 2      |
 | --------------------- | ------------ | ----------- |
 | `UUID`                | `UUID-1`     | `UUID-2`    |
 | `P1_is_identified_by` | Dan Terminus | Perturbator |
 
-🎶 Table des expressions :
+🗃️🎶 Table des `F2_Expression` :
 
-| Colonnes                  | Item 1            | Commentaire |
-| ------------------------- | ----------------- | ----------- |
-| `UUID`                    | `UUID-3`          |             |
-| `P1_is_identified_by`     | The Wrath of Code |             |
-| `0SE_F280_UUID`           | `UUID-4`          |             |
-| `0SE_a0_U31_had_function` | `aat:300025671`   |             |
-| `0SE_a0_P14`              | `UUID-1`          |             |
-| `0SE_a0_UUID`             | `UUID-5`          |             |
-| `0SE_b0_U31_had_function` | `aat:300025671`   |             |
-| `0SE_b0_P14`              | `UUID-2`          |             |
-| `0SE_b0_UUID`             | `UUID-6`          |             |
+| Colonnes                           | Colonnes (API)             | Item 1                                                       |
+| ---------------------------------- | -------------------------- | ------------------------------------------------------------ |
+| Identifiant de la F2               | `UUID`                     | `UUID-3`                                                     |
+| Titre de la F2                     | `P1_is_identified_by`      | The Wrath of Code                                            |
+| Identifiant du F28 de la F2        | `0SE_F280_UUID`            | `UUID-4`                                                     |
+| Fonction de la 1<sup>ère</sup>  E7 | `0SE_E7a_U31_had_function` | [`aat:300025671`](http://vocab.getty.edu/page/aat/300025671) |
+| Auteur de la 1<sup>ère</sup> E7    | `0SE_E7a_P14`              | `UUID-1`                                                     |
+| UUID de la 1<sup>ère</sup> E7      | `0SE_E7a_UUID`             | `UUID-5`                                                     |
+| Fonction de la 2<sup>ème</sup>  E7 | `0SE_E7b_U31_had_function` | [`aat:300025671`](http://vocab.getty.edu/page/aat/300025671) |
+| Auteur de la 2<sup>ème</sup> E7    | `0SE_E7b_P14`              | `UUID-2`                                                     |
+| UUID de la 2<sup>ème</sup> E7      | `0SE_E7b_UUID`             | `UUID-6`                                                     |
 
-Le problème avec cette approche, c'est que nous ne pouvons pas connaître le
-nombre de E7 par F28, et qu'il faut créer autant de jeux de colonnes qu'il y a
-de E7.
-
-TODO : reste à connecter les n E7 à l'unique F28.
+Cette approche convient quand on a un nombre « raisonnable » de E7 rattachés au F28, et qu'il est possible de créer un jeu de colonne pour chacun d'entre eux. Dans le cas où ce nombre de E7 pourrait être important et non déterminable en amont, ils devraient être définis dans une table à part.
