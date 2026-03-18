@@ -52,6 +52,14 @@ flowchart TB
 | Fonction de la 2<sup>ème</sup> E7 | `E70a0___U31_had_function`        | [`aat:300025671`](http://vocab.getty.edu/page/aat/300025671) |                            | <tr></tr>       |
 | Auteur de la 2<sup>ème</sup> E7   | `E70a0___P14_carried_out_by`      | `UUID-2`                                                     |                            | <tr></tr>       |
 
+<table>
+<tbody>
+<tr>
+<td>a</td>
+</tr>
+</tbody>
+</table>
+
 `[1]` On exprime ici que la `F2` est connectée à une `F28` via `R17i`. On définit l'UUID de la sous-entité `F28` souhaité dans la cellule.
 <br>
 `[2]` On exprime ici que les `E7` sont connectés à la `F28` via `P9`. On définit les UUID des sous-entité `E7` souhaités dans la cellule.
