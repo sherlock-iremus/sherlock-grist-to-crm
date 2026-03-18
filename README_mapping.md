@@ -40,11 +40,13 @@ flowchart TB
 
 🗃️🎶 Table des `F2_Expression` :
 
-| Colonnes                    | Colonnes (API)        | Item 1            | Commentaire                                        |
-| --------------------------- | --------------------- | ----------------- | -------------------------------------------------- |
-| Identifiant de la F2        | `UUID`                | `UUID-3`          |                                                    |
-| Titre de la F2              | `P1_is_identified_by` | The Wrath of Code |                                                    |
-| Identifiant du F28 de la F2 | `R17i___F280`         | `UUID-4`          | Grist sert de cache pour les UUID des sous-entités |
+| Colonnes                    | Colonnes (API)        | Item 1            | Commentaire |
+| --------------------------- | --------------------- | ----------------- | ----------- |
+| Identifiant de la F2        | `UUID`                | `UUID-3`          |             |
+| Titre de la F2              | `P1_is_identified_by` | The Wrath of Code |             |
+| Identifiant du F28 de la F2 | `R17i___F280`         | `UUID-4`          | `[1]`       |
+
+  `[1]` On exprime ici que la `F2` est connectée à une `F28` via `R17i`. Grist sert de cache pour les UUID des sous-entités
 
 <!--
 | Fonction de la 1<sup>ère</sup>  E7 | `0SE_E7a_U31_had_function` | [`aat:300025671`](http://vocab.getty.edu/page/aat/300025671) |
