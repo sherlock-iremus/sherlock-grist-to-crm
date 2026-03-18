@@ -33,10 +33,10 @@ flowchart TB
 
 ### 🗃️🧑‍🎤 Table des `E21_Person`
 
-| Colonnes              | Item 1       | Item 2      |
-| --------------------- | ------------ | ----------- |
-| `UUID`                | `UUID-1`     | `UUID-2`    |
-| `P1_is_identified_by` | Dan Terminus | Perturbator |
+| Colonnes              | Item 1       | Item 2            |
+| --------------------- | ------------ | ----------------- |
+| `UUID`                | `UUID-1`     | `UUID-2`    <tr/> |
+| `P1_is_identified_by` | Dan Terminus | Perturbator <tr/> |
 
 ### 🗃️🎶 Table des `F2_Expression`
 
@@ -52,13 +52,6 @@ flowchart TB
 | Fonction de la 2<sup>ème</sup> E7 | `E70a0___U31_had_function`        | [`aat:300025671`](http://vocab.getty.edu/page/aat/300025671) |                            | <tr></tr>       |
 | Auteur de la 2<sup>ème</sup> E7   | `E70a0___P14_carried_out_by`      | `UUID-2`                                                     |                            | <tr></tr>       |
 
-<table>
-<tbody>
-<tr>
-<td>a</td>
-</tr>
-</tbody>
-</table>
 
 `[1]` On exprime ici que la `F2` est connectée à une `F28` via `R17i`. On définit l'UUID de la sous-entité `F28` souhaité dans la cellule.
 <br>
