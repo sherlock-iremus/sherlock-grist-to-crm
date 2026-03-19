@@ -78,7 +78,7 @@ flowchart TB
 
 ### 🗃️🎶 Table de `F2_Expression`
 
-| Colonnes                          | Colonnes (API)    | Record 1                                                     | Cachable à l'utilisateur ? | Note    |
+| Colonne (Label)                   | Colonne (Id)      | Record 1                                                     | Cachable à l'utilisateur ? | Note    |
 | --------------------------------- | ----------------- | ------------------------------------------------------------ | :------------------------: | ------- |
 | Identifiant                       | `UUID`            | `UUID-3`                                                     |             ✅              | <tr/>   |
 | Titre                             | `P1`              | The Wrath of Code                                            |                            | <tr/>   |
