@@ -71,10 +71,10 @@ flowchart TB
 
 ### 🗃️🧑‍🎤 Table de `E21_Person`
 
-| Colonnes              | Record 1     | Record 2          |
-| --------------------- | ------------ | ----------------- |
-| `UUID`                | `UUID-1`     | `UUID-2`    <tr/> |
-| `P1_is_identified_by` | Dan Terminus | Perturbator <tr/> |
+| Colonne (Id) | Record 1     | Record 2          |
+| ------------ | ------------ | ----------------- |
+| `UUID`       | `UUID-1`     | `UUID-2`    <tr/> |
+| `P1`         | Dan Terminus | Perturbator <tr/> |
 
 ### 🗃️🎶 Table de `F2_Expression`
 
