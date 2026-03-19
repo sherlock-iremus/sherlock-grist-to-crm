@@ -78,17 +78,17 @@ flowchart TB
 
 ### 🗃️🎶 Table de `F2_Expression`
 
-| Colonnes                          | Colonnes (API)        | Record 1                                                     | À cacher à l'utilisateur ? | Note    |
-| --------------------------------- | --------------------- | ------------------------------------------------------------ | :------------------------: | ------- |
-| Identifiant                       | `UUID`                | `UUID-3`                                                     |             ✅              | <tr/>   |
-| Titre                             | `P1`                  | The Wrath of Code                                            |                            | <tr/>   |
-| Identifiant du F28                | `R17i___F280a0`       | `UUID-4`                                                     |             ✅              | ♈ <tr/> |
-| 1<sup>ère</sup> E7                | `F280a0___P9___E70a0` | `UUID-5`                                                     |             ✅              | ♊ <tr/> |
-| Fonction de la 1<sup>ère</sup> E7 | `E70a0___U31`         | [`aat:300025671`](http://vocab.getty.edu/page/aat/300025671) |                            | <tr/>   |
-| Auteur de la 1<sup>ère</sup> E7   | `E70a0___P14`         | `UUID-1`                                                     |                            | <tr/>   |
-| 2<sup>ème</sup> E7                | `F280a0___P9___E70a0` | `UUID-6`                                                     |             ✅              | ♊ <tr/> |
-| Fonction de la 2<sup>ème</sup> E7 | `E70a0___U31`         | [`aat:300025671`](http://vocab.getty.edu/page/aat/300025671) |                            | <tr/>   |
-| Auteur de la 2<sup>ème</sup> E7   | `E70a0___P14`         | `UUID-2`                                                     |                            | <tr/>   |
+| Colonnes                          | Colonnes (API)    | Record 1                                                     | Cachable à l'utilisateur ? | Note    |
+| --------------------------------- | ----------------- | ------------------------------------------------------------ | :------------------------: | ------- |
+| Identifiant                       | `UUID`            | `UUID-3`                                                     |             ✅              | <tr/>   |
+| Titre                             | `P1`              | The Wrath of Code                                            |                            | <tr/>   |
+| Identifiant du F28                | `R17i___F28a`     | `UUID-4`                                                     |             ✅              | ♈ <tr/> |
+| 1<sup>ère</sup> E7                | `F28a___P9___E7a` | `UUID-5`                                                     |             ✅              | ♊ <tr/> |
+| Fonction de la 1<sup>ère</sup> E7 | `E7a___U31`       | [`aat:300025671`](http://vocab.getty.edu/page/aat/300025671) |                            | <tr/>   |
+| Auteur de la 1<sup>ère</sup> E7   | `E7a___P14`       | `UUID-1`                                                     |                            | <tr/>   |
+| 2<sup>ème</sup> E7                | `F28a___P9___E7b` | `UUID-6`                                                     |             ✅              | ♊ <tr/> |
+| Fonction de la 2<sup>ème</sup> E7 | `E7b___U31`       | [`aat:300025671`](http://vocab.getty.edu/page/aat/300025671) |                            | <tr/>   |
+| Auteur de la 2<sup>ème</sup> E7   | `E7b___P14`       | `UUID-2`                                                     |                            | <tr/>   |
 
 
 ♈ On exprime ici que la `F2` est connectée à une `F28` via `R17i`. On définit l'UUID de la sous-entité `F28` souhaité dans la cellule.
